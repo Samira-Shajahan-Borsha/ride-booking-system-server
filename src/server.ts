@@ -10,7 +10,7 @@ const startServer = async () => {
       console.log(`Server is listening on port ${port}`);
     });
   } catch (error) {
-    console.log(`Error from server`);
+    console.log(`Error from server`, error);
   }
 };
 
@@ -30,6 +30,29 @@ process.on("SIGTERM", () => {
 
 process.on("SIGINT", () => {
   console.log("SIGINT signal received... Server shutting down...");
+
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  }
+
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (error) => {
+  console.log("Unhandled Rejection Detected... Server shutting down...", error);
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  }
+
+  process.exit(1);
+});
+
+process.on("uncaughtException", (error) => {
+  console.log("Uncaught Exception Detected... Server shutting down...", error);
 
   if (server) {
     server.close(() => {
