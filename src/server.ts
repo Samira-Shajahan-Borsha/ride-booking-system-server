@@ -6,6 +6,7 @@ const port = 5000;
 
 const startServer = async () => {
   try {
+    // TO DO: Connect Database
     server = app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);
     });
