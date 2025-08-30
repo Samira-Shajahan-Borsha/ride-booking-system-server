@@ -8,7 +8,7 @@ app.use(cors());
 app.get("/", (req: Request, res: Response) => {
   res.send({
     success: true,
-    message: "Welcome to backend server",
+    message: "Welcome to Ride Booking System",
   });
 });
 
