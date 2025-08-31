@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { envVars } from "../../config/env";
+import AppError from "../../errorHelpers/AppError";
 import { IAuthProvider, IUser } from "./user.interface";
 import { User } from "./user.model";
 import bcrypt from "bcryptjs";
+import httpStatusCode from "http-status-codes";
 
 const createUser = async (payload: Partial<IUser>) => {
   const { email, password: plainPassword, ...rest } = payload;
@@ -9,7 +12,7 @@ const createUser = async (payload: Partial<IUser>) => {
   const isUserExist = await User.findOne({ email });
 
   if (isUserExist) {
-    throw new Error("User already exists");
+    throw new AppError(httpStatusCode.BAD_REQUEST, "User with this email already exists");
   }
 
   const hashedPassword = await bcrypt.hash(plainPassword as string, Number(envVars.BCRYPT_SALT_ROUND));
@@ -26,7 +29,6 @@ const createUser = async (payload: Partial<IUser>) => {
     ...rest,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password, ...user } = createdUser.toObject();
 
   return user;
@@ -36,7 +38,6 @@ const getAllUsers = async () => {
   const allUsers = await User.find({});
 
   const users = allUsers?.map((user) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...usersWithoutPassword } = user.toObject();
     return usersWithoutPassword;
   });
