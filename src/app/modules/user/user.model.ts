@@ -25,6 +25,7 @@ const userSchema = new Schema<IUser>(
         values: Object.values(Role),
         message: "{VALUE} is not supported as role",
       },
+      required: [true, "Role is required"],
     },
     isVerified: { type: Boolean, default: false },
     isActive: {
