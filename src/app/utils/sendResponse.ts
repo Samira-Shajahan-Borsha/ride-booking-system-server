@@ -1,8 +1,8 @@
 import { Response } from "express";
 
-type TMeta = {
+interface TMeta {
   total: number;
-};
+}
 
 interface IResponse<T> {
   statusCode: number;

@@ -26,6 +26,7 @@ const createUser = async (payload: Partial<IUser>) => {
     ...rest,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password, ...user } = createdUser.toObject();
 
   return user;
@@ -35,11 +36,10 @@ const getAllUsers = async () => {
   const allUsers = await User.find({});
 
   const users = allUsers?.map((user) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...usersWithoutPassword } = user.toObject();
     return usersWithoutPassword;
   });
-
-  console.log(users, "users");
 
   const totalUsers = await User.countDocuments();
 
