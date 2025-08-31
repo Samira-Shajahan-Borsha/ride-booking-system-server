@@ -7,18 +7,6 @@ import AppError from "../../errorHelpers/AppError";
 const router = Router();
 
 router.post("/register", validateRequest(creatUserZodSchema), UserController.createUser);
-router.get(
-  "/get-users",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
-
-    if (!token) {
-      throw new AppError(401, "No token received");
-    }
-
-    
-  },
-  UserController.getAllUsers
-);
+router.get("/get-users", UserController.getAllUsers);
 
 export const UserRoutes = router;
