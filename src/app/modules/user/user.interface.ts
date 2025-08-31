@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 
 export enum Role {
+  SUPER_ADMIN = "SUPER_ADMIN",
   ADMIN = "ADMIN",
   DRIVER = "DRIVER",
   RIDER = "RIDER",
@@ -24,8 +25,8 @@ export interface IUser {
   password?: string;
   phone?: string;
   role: Role;
-  auths: IAuthProvider[];
   isVerified: boolean;
   isDeleted: boolean;
   isActive: IsActive;
+  auths: IAuthProvider[];
 }

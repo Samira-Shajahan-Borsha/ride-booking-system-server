@@ -1,11 +1,14 @@
 import { NextFunction, Response, Request } from "express";
 import { UserService } from "./user.service";
+import { sendResponse } from "../../utils/sendResponse";
+import httpStatusCode from "http-status-codes";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await UserService.createUser(req.body);
 
-    res.status(201).json({
+    sendResponse(res, {
+      statusCode: httpStatusCode.CREATED,
       success: true,
       message: "User created successfully",
       data: user,
@@ -15,6 +18,23 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await UserService.getAllUsers();
+
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "All users retrieved successfully",
+      data: result.data,
+      meta: result.meta,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const UserController = {
   createUser,
+  getAllUsers,
 };

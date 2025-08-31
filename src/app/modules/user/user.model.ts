@@ -15,9 +15,9 @@ const authProviderSchema = new Schema<IAuthProvider>(
 
 const userSchema = new Schema<IUser>(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String },
+    name: { type: String, required: [true, "Name is required"] },
+    email: { type: String, required: [true, "Email is required"] },
+    password: { type: String, minlength: [8, "Password must contain 8 characters long"] },
     phone: { type: String },
     role: {
       type: String,
@@ -26,7 +26,6 @@ const userSchema = new Schema<IUser>(
         message: "{VALUE} is not supported as role",
       },
     },
-    auths: [authProviderSchema],
     isVerified: { type: Boolean, default: false },
     isActive: {
       type: String,
@@ -37,6 +36,7 @@ const userSchema = new Schema<IUser>(
       default: IsActive.ACTIVE,
     },
     isDeleted: { type: Boolean, default: false },
+    auths: [authProviderSchema],
   },
   { timestamps: true, versionKey: false }
 );
