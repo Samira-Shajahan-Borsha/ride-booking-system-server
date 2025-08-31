@@ -15,8 +15,8 @@ const authProviderSchema = new Schema<IAuthProvider>(
 
 const userSchema = new Schema<IUser>(
   {
-    name: { type: String, required: [true, "Name is required"] },
-    email: { type: String, required: [true, "Email is required"] },
+    name: { type: String, required: [true, "Name is required"], trim: true },
+    email: { type: String, required: [true, "Email is required"], trim: true },
     password: { type: String, minlength: [8, "Password must contain 8 characters long"] },
     phone: { type: String },
     role: {
