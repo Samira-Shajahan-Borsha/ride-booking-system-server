@@ -1,12 +1,13 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { UserController } from "./user.controller";
-import { creatUserZodSchema } from "./user.validation";
+import { Router } from "express";
 import { validateRequest } from "../../middlewares/validateRequest";
-import AppError from "../../errorHelpers/AppError";
+import { UserController } from "./user.controller";
+import { Role } from "./user.interface";
+import { creatUserZodSchema } from "./user.validation";
+import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = Router();
 
 router.post("/register", validateRequest(creatUserZodSchema), UserController.createUser);
-router.get("/get-users", UserController.getAllUsers);
+router.get("/get-users", checkAuth(Role.ADMIN, Role.SUPER_ADMIN), UserController.getAllUsers);
 
 export const UserRoutes = router;
