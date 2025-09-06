@@ -5,7 +5,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { UserService } from "./user.service";
 
-const createUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const createUser = catchAsync(async (req: Request, res: Response) => {
     const user = await UserService.createUser(req.body);
 
     sendResponse(res, {
@@ -16,7 +16,7 @@ const createUser = catchAsync(async (req: Request, res: Response, next: NextFunc
     });
 });
 
-const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const getAllUsers = catchAsync(async (req: Request, res: Response) => {
     const result = await UserService.getAllUsers();
 
     sendResponse(res, {
@@ -28,7 +28,48 @@ const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFun
     });
 });
 
+const getMe = catchAsync(async (req: Request, res: Response) => {
+    const decodedToken = req.user;
+    const result = await UserService.getMe(decodedToken.userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Your profile retrieved successfully",
+        data: result,
+    });
+});
+
+const getUser = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.params.id;
+    const result = await UserService.getUser(userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "User retrieved successfully",
+        data: result,
+    });
+});
+
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.params.id;
+    const decodedToken = req.user;
+
+    const result = await UserService.updateUser(userId, decodedToken, req.body);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "User updated successfully",
+        data: result,
+    });
+});
+
 export const UserController = {
     createUser,
     getAllUsers,
+    getMe,
+    getUser,
+    updateUser,
 };

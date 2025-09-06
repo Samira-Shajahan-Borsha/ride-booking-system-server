@@ -19,8 +19,6 @@ export const checkAuth =
 
         const verifiedToken = verifyToken(accessToken, envVars.JWT_ACCESS_TOKEN_SECRET);
 
-        console.log(verifiedToken, "verified token from middleware");
-
         const isUserExist = await User.findById(verifiedToken.userId);
 
         console.log(isUserExist, "User from middleware");

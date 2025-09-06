@@ -1,7 +1,8 @@
 To do:
 
 -   seed super admin
--   user validation
+-   update user validation
+-   update user zodscehma
 -   handle mongoose and zod error
 -   handle phone number while creating a user
 -   handle all users route by query builder
