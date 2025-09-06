@@ -12,7 +12,7 @@ export enum APPROVAL_STATUS {
 }
 
 export interface IDriver {
-    userId: Types.ObjectId;
+    user: Types.ObjectId;
     totalEarnings: number;
     rides?: Types.ObjectId[];
     isAvailable: IS_AVAILABLE;

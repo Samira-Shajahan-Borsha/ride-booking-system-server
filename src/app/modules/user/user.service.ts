@@ -46,7 +46,7 @@ const createUser = async (payload: Partial<IUser>) => {
             await Driver.create(
                 [
                     {
-                        userId: createdUser[0]._id,
+                        user: createdUser[0]._id,
                         approvalStatus: APPROVAL_STATUS.PENDING,
                         totalEarnings: 0,
                     },
