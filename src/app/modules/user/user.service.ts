@@ -3,35 +3,68 @@ import bcrypt from "bcryptjs";
 import httpStatus from "http-status-codes";
 import { envVars } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
-import { IAuthProvider, IUser } from "./user.interface";
+import { IAuthProvider, IUser, ROLE } from "./user.interface";
 import { User } from "./user.model";
+import { Driver } from "../driver/driver.model";
+import { APPROVAL_STATUS } from "../driver/driver.interface";
 
 const createUser = async (payload: Partial<IUser>) => {
-    const { email, password: plainPassword, ...rest } = payload;
+    const session = await User.startSession();
+    session.startTransaction();
 
-    const isUserExist = await User.findOne({ email });
+    try {
+        const { email, password: plainPassword, role, ...rest } = payload;
 
-    if (isUserExist) {
-        throw new AppError(httpStatus.BAD_REQUEST, "User with this email already exists");
+        const isUserExist = await User.findOne({ email });
+
+        if (isUserExist) {
+            throw new AppError(httpStatus.BAD_REQUEST, "User with this email already exists");
+        }
+
+        const hashedPassword = await bcrypt.hash(plainPassword as string, Number(envVars.BCRYPT_SALT_ROUND));
+
+        const authProvider: IAuthProvider = {
+            provider: "credentials",
+            providerId: email as string,
+        };
+
+        const createdUser = await User.create(
+            [
+                {
+                    email,
+                    role,
+                    password: hashedPassword,
+                    auths: [authProvider],
+                    ...rest,
+                },
+            ],
+            { session }
+        );
+
+        if (role === ROLE.DRIVER) {
+            await Driver.create(
+                [
+                    {
+                        userId: createdUser[0]._id,
+                        approvalStatus: APPROVAL_STATUS.PENDING,
+                        totalEarnings: 0,
+                    },
+                ],
+                { session }
+            );
+        }
+
+        const { password, ...user } = createdUser[0].toObject();
+
+        await session.commitTransaction();
+        session.endSession();
+
+        return user;
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        throw new AppError(httpStatus.BAD_REQUEST, "Error occurs while creating user");
     }
-
-    const hashedPassword = await bcrypt.hash(plainPassword as string, Number(envVars.BCRYPT_SALT_ROUND));
-
-    const authProvider: IAuthProvider = {
-        provider: "credentials",
-        providerId: email as string,
-    };
-
-    const createdUser = await User.create({
-        email,
-        password: hashedPassword,
-        auths: [authProvider],
-        ...rest,
-    });
-
-    const { password, ...user } = createdUser.toObject();
-
-    return user;
 };
 
 const getAllUsers = async () => {

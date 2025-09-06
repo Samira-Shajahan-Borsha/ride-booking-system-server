@@ -5,6 +5,7 @@ To do:
 -   handle mongoose and zod error
 -   handle phone number while creating a user
 -   handle all users route by query builder
+-   handle role and Active status and and driver approval status while creating user
 -   handle login for blocked or suspended user
 -   handle update user
 -   checkAuth middleware improvement needed

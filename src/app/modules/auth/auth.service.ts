@@ -6,6 +6,8 @@ import { IS_ACTIVE, IUser, ROLE } from "../user/user.interface";
 import { User } from "../user/user.model";
 import { generateToken, verifyToken } from "../../utils/jwt";
 import { envVars } from "../../config/env";
+import { Driver } from "../driver/driver.model";
+import { JwtPayload } from "jsonwebtoken";
 
 const credentialsLogin = async (payload: Partial<IUser>) => {
     const { email, password: plainPassword } = payload;
@@ -51,10 +53,11 @@ const getAccessToken = async (refreshToken: string) => {
     }
 
     // Todo handle driver role approval status
-    /* if (isUserExist.role === ROLE.DRIVER && isUserExist.isActive === IS_ACTIVE.BLOCKED) {
+    /* if (isUserExist.role === ROLE.DRIVER) {
+        
         throw new AppError(httpStatus.BAD_REQUEST, `User account is blocked or has been removed`);
-    }
- */
+    } */
+
     if (isUserExist.isDeleted) {
         throw new AppError(httpStatus.BAD_REQUEST, "User account is deleted. Please contact with support");
     }

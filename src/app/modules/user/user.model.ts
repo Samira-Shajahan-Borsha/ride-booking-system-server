@@ -32,7 +32,7 @@ const userSchema = new Schema<IUser>(
             type: String,
             enum: {
                 values: Object.values(IS_ACTIVE),
-                message: "{VALUE} is not supported",
+                message: "{VALUE} is not supported as active status",
             },
             default: IS_ACTIVE.ACTIVE,
         },
