@@ -7,6 +7,7 @@ import { IAuthProvider, IUser, ROLE } from "./user.interface";
 import { User } from "./user.model";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
+import { JwtPayload } from "jsonwebtoken";
 
 const createUser = async (payload: Partial<IUser>) => {
     const session = await User.startSession();
@@ -85,7 +86,63 @@ const getAllUsers = async () => {
     };
 };
 
+const getMe = async (userId: string) => {
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User doesn't exist");
+    }
+
+    return user;
+};
+
+const getUser = async (userId: string) => {
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User doesn't exist");
+    }
+
+    return user;
+};
+
+const updateUser = async (userId: string, decodedToken: JwtPayload, payload: Partial<IUser>) => {
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User doesn't exist");
+    }
+
+    if (decodedToken.role === ROLE.DRIVER || decodedToken.role === ROLE.RIDER) {
+        if (payload.role || payload.isActive || payload.isDeleted) {
+            throw new AppError(
+                httpStatus.FORBIDDEN,
+                "Drivers and riders are not authorized to update user status or roles"
+            );
+        }
+    }
+
+    if (decodedToken.role === ROLE.DRIVER || decodedToken.role === ROLE.RIDER) {
+        if (String(user._id) !== decodedToken.userId) {
+            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to update other user");
+        }
+    }
+
+    if (user.role === ROLE.SUPER_ADMIN && decodedToken.role === ROLE.ADMIN) {
+        throw new AppError(httpStatus.FORBIDDEN, "Admins are not authorized to assign or update the Super Admin role");
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(userId, payload, { new: true, runValidators: true }).select(
+        "-password"
+    );
+
+    return updatedUser;
+};
+
 export const UserService = {
     createUser,
     getAllUsers,
+    getMe,
+    getUser,
+    updateUser,
 };
