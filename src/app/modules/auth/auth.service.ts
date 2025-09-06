@@ -1,14 +1,14 @@
 import bcrypt from "bcryptjs";
 import httpStatus from "http-status-codes";
 import AppError from "../../errorHelpers/AppError";
-import { createTokens } from "../../utils/usertokens";
 import { IS_ACTIVE, IUser, ROLE } from "../user/user.interface";
 import { User } from "../user/user.model";
 import { generateToken, verifyToken } from "../../utils/jwt";
 import { envVars } from "../../config/env";
 import { Driver } from "../driver/driver.model";
-import { JwtPayload } from "jsonwebtoken";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
+import { createTokens } from "../../utils/userTokens";
+import { JwtPayload } from "jsonwebtoken";
 
 const credentialsLogin = async (payload: Partial<IUser>) => {
     const { email, password: plainPassword } = payload;
@@ -85,7 +85,28 @@ const getAccessToken = async (refreshToken: string) => {
     };
 };
 
+const changePassword = async (oldPassword: string, newPassword: string, decodedToken: JwtPayload) => {
+    const user = await User.findById(decodedToken.userId);
+
+    if (!user) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    const isOldPasswordMatch = await bcrypt.compare(oldPassword, user?.password);
+
+    if (!isOldPasswordMatch) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Old password is incorrect");
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, Number(envVars.BCRYPT_SALT_ROUND));
+
+    user.password = hashedPassword;
+
+    user.save();
+};
+
 export const AuthServices = {
     credentialsLogin,
     getAccessToken,
+    changePassword,
 };
