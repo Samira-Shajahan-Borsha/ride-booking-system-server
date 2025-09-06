@@ -19,11 +19,7 @@ export const checkAuth =
 
         const verifiedToken = verifyToken(accessToken, envVars.JWT_ACCESS_TOKEN_SECRET);
 
-        console.log(verifiedToken, "verified token from middleware");
-
         const isUserExist = await User.findById(verifiedToken.userId);
-
-        console.log(isUserExist, "User from middleware");
 
         if (!isUserExist) {
             throw new AppError(httpStatus.NOT_FOUND, "User does not exist");
@@ -54,8 +50,6 @@ export const checkAuth =
         if (isUserExist.isDeleted) {
             throw new AppError(httpStatus.BAD_REQUEST, "User account is deleted. Please contact with support");
         }
-
-        // console.log(verifiedToken);
 
         if (!authRole.includes(verifiedToken.role)) {
             throw new AppError(httpStatus.UNAUTHORIZED, "You are not permitted to access this route");
