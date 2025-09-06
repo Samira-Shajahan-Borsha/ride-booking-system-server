@@ -1,57 +1,91 @@
-import { envVars } from "../../config/env";
-import { IAuthProvider, IUser } from "./user.interface";
-import { User } from "./user.model";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import bcrypt from "bcryptjs";
+import httpStatus from "http-status-codes";
+import { envVars } from "../../config/env";
+import AppError from "../../errorHelpers/AppError";
+import { IAuthProvider, IUser, ROLE } from "./user.interface";
+import { User } from "./user.model";
+import { Driver } from "../driver/driver.model";
+import { APPROVAL_STATUS } from "../driver/driver.interface";
 
 const createUser = async (payload: Partial<IUser>) => {
-  const { email, password: plainPassword, ...rest } = payload;
+    const session = await User.startSession();
+    session.startTransaction();
 
-  const isUserExist = await User.findOne({ email });
+    try {
+        const { email, password: plainPassword, role, ...rest } = payload;
 
-  if (isUserExist) {
-    throw new Error("User already exists");
-  }
+        const isUserExist = await User.findOne({ email });
 
-  const hashedPassword = await bcrypt.hash(plainPassword as string, Number(envVars.BCRYPT_SALT_ROUND));
+        if (isUserExist) {
+            throw new AppError(httpStatus.BAD_REQUEST, "User with this email already exists");
+        }
 
-  const authProvider: IAuthProvider = {
-    provider: "credentials",
-    providerId: email as string,
-  };
+        const hashedPassword = await bcrypt.hash(plainPassword as string, Number(envVars.BCRYPT_SALT_ROUND));
 
-  const createdUser = await User.create({
-    email,
-    password: hashedPassword,
-    auths: [authProvider],
-    ...rest,
-  });
+        const authProvider: IAuthProvider = {
+            provider: "credentials",
+            providerId: email as string,
+        };
 
-  const { password, ...user } = createdUser.toObject();
+        const createdUser = await User.create(
+            [
+                {
+                    email,
+                    role,
+                    password: hashedPassword,
+                    auths: [authProvider],
+                    ...rest,
+                },
+            ],
+            { session }
+        );
 
-  return user;
+        if (role === ROLE.DRIVER) {
+            await Driver.create(
+                [
+                    {
+                        userId: createdUser[0]._id,
+                        approvalStatus: APPROVAL_STATUS.PENDING,
+                        totalEarnings: 0,
+                    },
+                ],
+                { session }
+            );
+        }
+
+        const { password, ...user } = createdUser[0].toObject();
+
+        await session.commitTransaction();
+        session.endSession();
+
+        return user;
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+        throw new AppError(httpStatus.BAD_REQUEST, "Error occurs while creating user");
+    }
 };
 
 const getAllUsers = async () => {
-  const allUsers = await User.find({});
+    const allUsers = await User.find({});
 
-  const users = allUsers?.map((user) => {
-    const { password, ...usersWithoutPassword } = user.toObject();
-    return usersWithoutPassword;
-  });
+    const users = allUsers?.map((user) => {
+        const { password, ...usersWithoutPassword } = user.toObject();
+        return usersWithoutPassword;
+    });
 
-  console.log(users, "users");
+    const totalUsers = await User.countDocuments();
 
-  const totalUsers = await User.countDocuments();
-
-  return {
-    data: users,
-    meta: {
-      total: totalUsers,
-    },
-  };
+    return {
+        data: users,
+        meta: {
+            total: totalUsers,
+        },
+    };
 };
 
 export const UserService = {
-  createUser,
-  getAllUsers,
+    createUser,
+    getAllUsers,
 };
