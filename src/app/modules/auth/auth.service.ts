@@ -8,6 +8,7 @@ import { generateToken, verifyToken } from "../../utils/jwt";
 import { envVars } from "../../config/env";
 import { Driver } from "../driver/driver.model";
 import { JwtPayload } from "jsonwebtoken";
+import { APPROVAL_STATUS } from "../driver/driver.interface";
 
 const credentialsLogin = async (payload: Partial<IUser>) => {
     const { email, password: plainPassword } = payload;
@@ -42,21 +43,30 @@ const getAccessToken = async (refreshToken: string) => {
     const isUserExist = await User.findOne({ email: verifiedRefreshToken.email });
 
     if (!isUserExist) {
-        throw new AppError(httpStatus.BAD_REQUEST, "User does not exist");
+        throw new AppError(httpStatus.NOT_FOUND, "User does not exist");
     }
 
     if (
         (isUserExist.role === ROLE.RIDER || isUserExist.role === ROLE.DRIVER) &&
         isUserExist.isActive === IS_ACTIVE.BLOCKED
     ) {
-        throw new AppError(httpStatus.BAD_REQUEST, "User account is blocked");
+        throw new AppError(httpStatus.BAD_REQUEST, "Your account is blocked");
     }
 
-    // Todo handle driver role approval status
-    /* if (isUserExist.role === ROLE.DRIVER) {
-        
-        throw new AppError(httpStatus.BAD_REQUEST, `User account is blocked or has been removed`);
-    } */
+    if (isUserExist.role === ROLE.DRIVER) {
+        const driver = await Driver.findOne({ userId: isUserExist._id });
+
+        if (!driver) {
+            throw new AppError(httpStatus.NOT_FOUND, "Driver does not exist");
+        }
+
+        if (driver.approvalStatus === APPROVAL_STATUS.SUSPEND) {
+            throw new AppError(
+                httpStatus.BAD_REQUEST,
+                `You account is ${APPROVAL_STATUS.SUSPEND}. Please contact with support team`
+            );
+        }
+    }
 
     if (isUserExist.isDeleted) {
         throw new AppError(httpStatus.BAD_REQUEST, "User account is deleted. Please contact with support");
