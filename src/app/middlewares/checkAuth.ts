@@ -21,7 +21,7 @@ export const checkAuth =
 
         const isUserExist = await User.findById(verifiedToken.userId);
 
-        console.log(isUserExist, "User from middleware");
+        // console.log(isUserExist, "User from middleware");
 
         if (!isUserExist) {
             throw new AppError(httpStatus.NOT_FOUND, "User does not exist");
@@ -35,7 +35,7 @@ export const checkAuth =
         }
 
         if (isUserExist.role === ROLE.DRIVER) {
-            const driver = await Driver.findOne({ userId: isUserExist._id });
+            const driver = await Driver.findOne({ user: isUserExist._id });
 
             if (!driver) {
                 throw new AppError(httpStatus.NOT_FOUND, "Driver does not exist");

@@ -3,7 +3,7 @@ import { APPROVAL_STATUS, IDriver, IS_AVAILABLE } from "./driver.interface";
 
 const driverSchema = new Schema<IDriver>(
     {
-        userId: {
+        user: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
