@@ -56,6 +56,20 @@ const suspendDriver = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const updateAvailableStatus = catchAsync(async (req: Request, res: Response) => {
+    const decodedToken = req.user;
+    const driverId = req.params.id;
+
+    const result = await DriverService.updateAvailableStatus(decodedToken.userId, driverId, req.body);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Driver online status updated successfully",
+        data: result,
+    });
+});
+
 const getSingleDriver = catchAsync(async (req: Request, res: Response) => {
     const driverId = req.params.id;
     const result = await DriverService.getSingleDriver(driverId);
@@ -72,6 +86,7 @@ export const DriverController = {
     getAllDrivers,
     getMyProfile,
     approveDriver,
-    getSingleDriver,
     suspendDriver,
+    updateAvailableStatus,
+    getSingleDriver,
 };

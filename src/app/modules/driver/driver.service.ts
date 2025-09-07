@@ -1,5 +1,5 @@
 import AppError from "../../errorHelpers/AppError";
-import { APPROVAL_STATUS, IDriver } from "./driver.interface";
+import { APPROVAL_STATUS, IDriver, IS_AVAILABLE } from "./driver.interface";
 import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
 
@@ -70,6 +70,35 @@ const suspendDriver = async (driverId: string) => {
     return updatedDriver;
 };
 
+const updateAvailableStatus = async (userId: string, driverId: string, payload: IDriver) => {
+    const existingDriver = await Driver.findById(driverId);
+
+    if (!existingDriver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    if (userId !== String(existingDriver.user)) {
+        throw new AppError(httpStatus.FORBIDDEN, "You are not authorized to access other driver profile");
+    }
+
+    if (existingDriver.isAvailable === payload.isAvailable) {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            `Driver availability status is already set to ${payload.isAvailable.toLowerCase()}`
+        );
+    }
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        existingDriver._id,
+        {
+            isAvailable: payload.isAvailable,
+        },
+        { new: true, runValidators: true }
+    ).populate("user", "name email isActive");
+
+    return updatedDriver;
+};
+
 const getSingleDriver = async (driverId: string) => {
     const isDriverExist = await Driver.findById(driverId).populate("user", "-password");
 
@@ -85,5 +114,6 @@ export const DriverService = {
     getMyProfile,
     approveDriver,
     suspendDriver,
+    updateAvailableStatus,
     getSingleDriver,
 };
