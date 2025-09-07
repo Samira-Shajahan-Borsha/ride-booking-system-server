@@ -1,4 +1,5 @@
 import AppError from "../../errorHelpers/AppError";
+import { APPROVAL_STATUS, IDriver } from "./driver.interface";
 import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
 
@@ -25,6 +26,50 @@ const getMyProfile = async (userId: string) => {
     return isDriverExist;
 };
 
+const approveDriver = async (driverId: string) => {
+    const existingDriver = await Driver.findById(driverId);
+
+    if (!existingDriver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    if (existingDriver.approvalStatus === APPROVAL_STATUS.APPROVED) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Driver has already been approved");
+    }
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        existingDriver._id,
+        {
+            approvalStatus: APPROVAL_STATUS.APPROVED,
+        },
+        { new: true, runValidators: true }
+    ).populate("user", "name email isActive");
+
+    return updatedDriver;
+};
+
+const suspendDriver = async (driverId: string) => {
+    const existingDriver = await Driver.findById(driverId);
+
+    if (!existingDriver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    if (existingDriver.approvalStatus === APPROVAL_STATUS.SUSPEND) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Driver has already been suspended");
+    }
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        existingDriver._id,
+        {
+            approvalStatus: APPROVAL_STATUS.SUSPEND,
+        },
+        { new: true, runValidators: true }
+    ).populate("user", "name email isActive");
+
+    return updatedDriver;
+};
+
 const getSingleDriver = async (driverId: string) => {
     const isDriverExist = await Driver.findById(driverId).populate("user", "-password");
 
@@ -38,5 +83,7 @@ const getSingleDriver = async (driverId: string) => {
 export const DriverService = {
     getAllDrivers,
     getMyProfile,
+    approveDriver,
+    suspendDriver,
     getSingleDriver,
 };

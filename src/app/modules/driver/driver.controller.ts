@@ -30,6 +30,32 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const approveDriver = catchAsync(async (req: Request, res: Response) => {
+    const driverId = req.params.id;
+
+    const result = await DriverService.approveDriver(driverId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Driver approved successfully",
+        data: result,
+    });
+});
+
+const suspendDriver = catchAsync(async (req: Request, res: Response) => {
+    const driverId = req.params.id;
+
+    const result = await DriverService.suspendDriver(driverId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Driver suspended successfully",
+        data: result,
+    });
+});
+
 const getSingleDriver = catchAsync(async (req: Request, res: Response) => {
     const driverId = req.params.id;
     const result = await DriverService.getSingleDriver(driverId);
@@ -45,5 +71,7 @@ const getSingleDriver = catchAsync(async (req: Request, res: Response) => {
 export const DriverController = {
     getAllDrivers,
     getMyProfile,
+    approveDriver,
     getSingleDriver,
+    suspendDriver,
 };
