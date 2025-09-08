@@ -5,6 +5,7 @@ export enum STATUS {
     REQUESTED = "REQUESTED",
     ACCEPTED = "ACCEPTED",
     PICKED_UP = "PICKED_UP",
+    IN_TRANSIT = "IN_TRANSIT",
     COMPLETED = "COMPLETED",
 }
 
@@ -21,15 +22,16 @@ export interface IDestination {
 }
 
 export interface IRide {
-    user: Types.ObjectId;
+    rider: Types.ObjectId;
     driver?: Types.ObjectId;
     vehicle?: Types.ObjectId;
+    currentRiderId?: Types.ObjectId | null;
     status: STATUS;
     pickUp: IPickUp;
     destination: IDestination;
     fare?: number;
     distance?: number;
-    requestedAt?: Date;
+    requestedAt: Date;
     acceptedAt?: Date;
     pickedUpAt?: Date;
     completedAt?: Date;

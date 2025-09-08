@@ -42,7 +42,7 @@ const destinationSchema = new Schema<IPickUp>(
 
 const rideSchema = new Schema<IRide>(
     {
-        user: {
+        rider: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
@@ -54,6 +54,10 @@ const rideSchema = new Schema<IRide>(
         vehicle: {
             type: Schema.Types.ObjectId,
             ref: "Vehicle",
+        },
+        currentRiderId: {
+            type: Schema.Types.ObjectId || null,
+            ref: "User",
         },
         status: {
             type: String,
@@ -73,10 +77,12 @@ const rideSchema = new Schema<IRide>(
         distance: {
             type: Number,
             required: true,
+            min: 0,
         },
         requestedAt: {
             type: Date,
             required: true,
+            default: new Date(),
         },
         acceptedAt: {
             type: Date,
