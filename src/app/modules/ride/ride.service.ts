@@ -110,8 +110,6 @@ const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
             { new: true, runValidators: true, session }
         );
 
-        // const earning = isDriverExist.totalEarnings + (updatedRide?.fare as number);
-
         await Driver.findByIdAndUpdate(
             isDriverExist._id,
             { currentRide: existingRide._id },
@@ -167,6 +165,10 @@ const updateRideStatus = async (rideId: string, userId: string, payload: Partial
         );
     }
 
+    if (payload.status === existingRide.status) {
+        throw new AppError(httpStatus.BAD_REQUEST, `Ride status has already been updated to ${existingRide.status}`);
+    }
+
     const rideUpdateStatusPayload =
         payload.status === STATUS.PICKED_UP
             ? {
@@ -184,8 +186,66 @@ const updateRideStatus = async (rideId: string, userId: string, payload: Partial
     return updatedRide;
 };
 
+const completeRide = async (rideId: string, userId: string) => {
+    const existingRide = await Ride.findById(rideId);
+
+    if (!existingRide) {
+        throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+    }
+
+    const currentUser = await User.findById(userId);
+
+    if (!currentUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    const isDriverExist = await Driver.findOne({ user: currentUser._id });
+
+    if (!isDriverExist) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    if (!existingRide.driver?.equals(isDriverExist._id)) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to complete this ride.");
+    }
+
+    if (
+        isDriverExist.approvalStatus === APPROVAL_STATUS.PENDING ||
+        isDriverExist.approvalStatus === APPROVAL_STATUS.SUSPEND
+    ) {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            "You cannot update this ride. You driving account has not been approved."
+        );
+    }
+
+    if (existingRide.status === STATUS.COMPLETED) {
+        throw new AppError(httpStatus.BAD_REQUEST, "This ride has already been completed and cannot be updated.");
+    }
+
+    const updatedRide = await Ride.findByIdAndUpdate(
+        rideId,
+        { status: STATUS.COMPLETED, completedAt: new Date() },
+        { new: true, runValidators: true }
+    ).select("-destination -pickUp");
+
+    const earning = isDriverExist.totalEarnings + (updatedRide?.fare as number);
+
+    await Driver.findByIdAndUpdate(
+        isDriverExist._id,
+        {
+            currentRide: null,
+            totalEarnings: earning,
+        },
+        { new: true, runValidators: true }
+    );
+
+    return updatedRide;
+};
+
 export const RideService = {
     requestRide,
     acceptRide,
     updateRideStatus,
+    completeRide,
 };
