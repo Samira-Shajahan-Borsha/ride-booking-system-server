@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Query } from "mongoose";
 import { excludeField } from "../constant";
 
@@ -42,7 +41,7 @@ export class QueryBuilder<T> {
 
     fields(): this {
         const fields = this.query.fields?.split(",").join(" ") || "";
-        console.log(fields);
+        // console.log(fields);
 
         this.modelQuery = this.modelQuery.select(fields);
         return this;

@@ -6,7 +6,8 @@ import { DriverService } from "./driver.service";
 import { JwtPayload } from "jsonwebtoken";
 
 const getAllDrivers = catchAsync(async (req: Request, res: Response) => {
-    const result = await DriverService.getAllDrivers();
+    const query = req.query;
+    const result = await DriverService.getAllDrivers(query as Record<string, string>);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,

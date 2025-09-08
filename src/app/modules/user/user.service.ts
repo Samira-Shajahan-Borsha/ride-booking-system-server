@@ -73,7 +73,7 @@ const createUser = async (payload: Partial<IUser>) => {
 const getAllUsers = async (query: Record<string, string>) => {
     const queryBuilder = new QueryBuilder(User.find(), query);
 
-    const users = await queryBuilder.search(userSearchableFields).filter().sort().fields().paginate();
+    const users = queryBuilder.search(userSearchableFields).filter().sort().fields().paginate();
 
     const [data, meta] = await Promise.all([users.build(), queryBuilder.getMeta()]);
 

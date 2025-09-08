@@ -1,18 +1,19 @@
 import AppError from "../../errorHelpers/AppError";
+import { QueryBuilder } from "../../utils/QueryBuilder";
 import { APPROVAL_STATUS, IDriver } from "./driver.interface";
 import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
 
-const getAllDrivers = async () => {
-    const drivers = await Driver.find({});
+const getAllDrivers = async (query: Record<string, string>) => {
+    const queryBuilder = new QueryBuilder(Driver.find(), query);
 
-    const totalDrivers = await Driver.countDocuments();
+    const drivers = await queryBuilder.filter().sort().fields().paginate();
+
+    const [data, meta] = await Promise.all([drivers.build().populate("user", "name email"), queryBuilder.getMeta()]);
 
     return {
-        data: drivers,
-        meta: {
-            total: totalDrivers,
-        },
+        data,
+        meta,
     };
 };
 

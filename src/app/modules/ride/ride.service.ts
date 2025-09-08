@@ -8,6 +8,7 @@ import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
 import { ROLE } from "../user/user.interface";
 import { JwtPayload } from "jsonwebtoken";
+import { QueryBuilder } from "../../utils/QueryBuilder";
 
 const requestRide = async (payload: IRide, riderId: string) => {
     const { rider, distance, ...rest } = payload;
@@ -324,6 +325,19 @@ const getSingleRide = async (rideId: string) => {
     return existingRide;
 };
 
+const getAllRide = async (query: Record<string, string>) => {
+    const queryBuilder = new QueryBuilder(Ride.find(), query);
+
+    const rides = queryBuilder.filter().sort().fields().paginate();
+
+    const [data, meta] = await Promise.all([rides.build(), queryBuilder.getMeta()]);
+
+    return {
+        data,
+        meta,
+    };
+};
+
 export const RideService = {
     requestRide,
     acceptRide,
@@ -332,4 +346,5 @@ export const RideService = {
     cancelRide,
     getMyRides,
     getSingleRide,
+    getAllRide,
 };
