@@ -1,5 +1,5 @@
 import AppError from "../../errorHelpers/AppError";
-import { APPROVAL_STATUS, IDriver, IS_AVAILABLE } from "./driver.interface";
+import { APPROVAL_STATUS, IDriver } from "./driver.interface";
 import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
 
@@ -79,6 +79,13 @@ const updateAvailableStatus = async (userId: string, driverId: string, payload: 
 
     if (userId !== String(existingDriver.user)) {
         throw new AppError(httpStatus.FORBIDDEN, "You are not authorized to access other driver profile");
+    }
+
+    if (
+        existingDriver.approvalStatus === APPROVAL_STATUS.PENDING ||
+        existingDriver.approvalStatus === APPROVAL_STATUS.SUSPEND
+    ) {
+        throw new AppError(httpStatus.FORBIDDEN, "Your profile is not accessible until it has been approved");
     }
 
     if (existingDriver.isAvailable === payload.isAvailable) {

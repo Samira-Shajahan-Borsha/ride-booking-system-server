@@ -11,12 +11,20 @@ export enum APPROVAL_STATUS {
     APPROVED = "APPROVED",
 }
 
+export interface ILocation {
+    address: string;
+    type?: "Point";
+    coordinates?: [number, number];
+}
+
 export interface IDriver {
     user: Types.ObjectId;
     totalEarnings: number;
-    rides?: Types.ObjectId[];
+    // rides?: Types.ObjectId[];
     isAvailable: IS_AVAILABLE;
     approvalStatus: APPROVAL_STATUS;
-    vehicleInfo?: string;
+    location?: ILocation;
+    currentRide?: Types.ObjectId | null;
+    vehicle?: Types.ObjectId;
     rating?: number;
 }

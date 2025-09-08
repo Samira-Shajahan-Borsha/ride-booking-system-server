@@ -1,5 +1,22 @@
 import { model, Schema } from "mongoose";
-import { APPROVAL_STATUS, IDriver, IS_AVAILABLE } from "./driver.interface";
+import { APPROVAL_STATUS, IDriver, ILocation, IS_AVAILABLE } from "./driver.interface";
+
+const locationSchema = new Schema<ILocation>(
+    {
+        address: {
+            type: String,
+        },
+        type: {
+            type: String,
+            enum: ["Point"],
+            default: "Point",
+        },
+        coordinates: {
+            type: Number,
+        },
+    },
+    { versionKey: false, timestamps: true, _id: false }
+);
 
 const driverSchema = new Schema<IDriver>(
     {
@@ -19,7 +36,7 @@ const driverSchema = new Schema<IDriver>(
                 values: Object.values(IS_AVAILABLE),
                 message: "{VALUE} is not supported as available status",
             },
-            default: IS_AVAILABLE.ONLINE,
+            default: IS_AVAILABLE.OFFLINE,
         },
         approvalStatus: {
             type: String,
@@ -29,9 +46,10 @@ const driverSchema = new Schema<IDriver>(
             },
             default: APPROVAL_STATUS.PENDING,
         },
-        vehicleInfo: {
-            type: String,
-            trim: true,
+        location: locationSchema,
+        vehicle: {
+            type: Schema.Types.ObjectId,
+            ref: "Vehicle",
         },
         rating: {
             type: Number,
