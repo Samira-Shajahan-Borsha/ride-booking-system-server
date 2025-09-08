@@ -314,6 +314,16 @@ const getMyRides = async (decodedToken: JwtPayload) => {
     return rides;
 };
 
+const getSingleRide = async (rideId: string) => {
+    const existingRide = await Ride.findById(rideId);
+
+    if (!existingRide) {
+        throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+    }
+
+    return existingRide;
+};
+
 export const RideService = {
     requestRide,
     acceptRide,
@@ -321,4 +331,5 @@ export const RideService = {
     completeRide,
     cancelRide,
     getMyRides,
+    getSingleRide,
 };

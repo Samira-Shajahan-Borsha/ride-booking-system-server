@@ -85,9 +85,20 @@ const getMyRides = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getSingleRide = catchAsync(async (req: Request, res: Response) => {
+    const rideId = req.params.id;
+
+    const result = await RideService.getSingleRide(rideId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Ride details retrieved successfully",
+        data: result,
+    });
+});
+
 const getAllRide = catchAsync(async (req: Request, res: Response) => {});
-const getMyRide = catchAsync(async (req: Request, res: Response) => {});
-const getSingleRide = catchAsync(async (req: Request, res: Response) => {});
 
 export const RideController = {
     requestRide,
@@ -95,8 +106,7 @@ export const RideController = {
     updateRideStatus,
     completeRide,
     cancelRide,
-    getAllRide,
     getMyRides,
-    getMyRide,
     getSingleRide,
+    getAllRide,
 };

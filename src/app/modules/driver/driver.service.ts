@@ -26,6 +26,16 @@ const getMyProfile = async (userId: string) => {
     return isDriverExist;
 };
 
+const getMyEarning = async (userId: string) => {
+    const existingDriver = await Driver.findOne({ user: userId }).select("totalEarnings");
+
+    if (!existingDriver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    return existingDriver;
+};
+
 const approveDriver = async (driverId: string) => {
     const existingDriver = await Driver.findById(driverId);
 
@@ -119,6 +129,7 @@ const getSingleDriver = async (driverId: string) => {
 export const DriverService = {
     getAllDrivers,
     getMyProfile,
+    getMyEarning,
     approveDriver,
     suspendDriver,
     updateAvailableStatus,

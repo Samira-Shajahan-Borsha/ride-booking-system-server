@@ -30,6 +30,19 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getMyEarning = catchAsync(async (req: Request, res: Response) => {
+    const decodedToken = req.user as JwtPayload;
+
+    const result = await DriverService.getMyEarning(decodedToken.userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Your earning retrieved successfully",
+        data: result,
+    });
+});
+
 const approveDriver = catchAsync(async (req: Request, res: Response) => {
     const driverId = req.params.id;
 
@@ -85,6 +98,7 @@ const getSingleDriver = catchAsync(async (req: Request, res: Response) => {
 export const DriverController = {
     getAllDrivers,
     getMyProfile,
+    getMyEarning,
     approveDriver,
     suspendDriver,
     updateAvailableStatus,
