@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 import { APPROVAL_STATUS, IDriver, ILocation, IS_AVAILABLE } from "./driver.interface";
 
-const locationSchema = new Schema<ILocation>(
+/* const locationSchema = new Schema<ILocation>(
     {
         address: {
             type: String,
@@ -16,7 +16,7 @@ const locationSchema = new Schema<ILocation>(
         },
     },
     { versionKey: false, timestamps: true, _id: false }
-);
+); */
 
 const driverSchema = new Schema<IDriver>(
     {
@@ -51,7 +51,7 @@ const driverSchema = new Schema<IDriver>(
             ref: "Ride",
             default: null,
         },
-        location: locationSchema,
+        // location: locationSchema,
         vehicle: {
             type: Schema.Types.ObjectId,
             ref: "Vehicle",

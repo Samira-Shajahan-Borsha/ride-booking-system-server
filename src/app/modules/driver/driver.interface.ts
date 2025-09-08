@@ -23,7 +23,7 @@ export interface IDriver {
     // rides?: Types.ObjectId[];
     isAvailable: IS_AVAILABLE;
     approvalStatus: APPROVAL_STATUS;
-    location?: ILocation;
+    // location?: ILocation;
     currentRide?: Types.ObjectId | null;
     vehicle?: Types.ObjectId;
     rating?: number;

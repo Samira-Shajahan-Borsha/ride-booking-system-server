@@ -6,6 +6,7 @@ import { Ride } from "./ride.model";
 import { BASE_FARE, PER_KM_RATE } from "./ride.constant";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
+import { ROLE } from "../user/user.interface";
 
 const requestRide = async (payload: IRide, riderId: string) => {
     const { rider, distance, ...rest } = payload;
@@ -53,6 +54,16 @@ const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
         throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
     }
 
+    if (
+        existingRide.status === STATUS.COMPLETED ||
+        existingRide.status === STATUS.IN_TRANSIT ||
+        existingRide.status === STATUS.PICKED_UP ||
+        existingRide.status === STATUS.ACCEPTED ||
+        existingRide.status === STATUS.CANCELED
+    ) {
+        throw new AppError(httpStatus.BAD_REQUEST, "This ride cannot be accepted");
+    }
+
     const currentUser = await User.findById(userId);
 
     if (!currentUser) {
@@ -84,15 +95,6 @@ const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
             httpStatus.BAD_REQUEST,
             "You are already assigned to another ride. Complete or cancel it before accepting a new one."
         );
-    }
-
-    if (
-        existingRide.status === STATUS.COMPLETED ||
-        existingRide.status === STATUS.IN_TRANSIT ||
-        existingRide.status === STATUS.PICKED_UP ||
-        existingRide.status === STATUS.ACCEPTED
-    ) {
-        throw new AppError(httpStatus.BAD_REQUEST, "This ride cannot be accepted");
     }
 
     const session = await Ride.startSession();
@@ -135,8 +137,8 @@ const updateRideStatus = async (rideId: string, userId: string, payload: Partial
         throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
     }
 
-    if (existingRide.status === STATUS.COMPLETED) {
-        throw new AppError(httpStatus.BAD_REQUEST, "You can not update the completed ride status");
+    if (existingRide.status === STATUS.COMPLETED || existingRide.status === STATUS.CANCELED) {
+        throw new AppError(httpStatus.BAD_REQUEST, "This ride status can not be updated");
     }
 
     const currentUser = await User.findById(userId);
@@ -193,6 +195,10 @@ const completeRide = async (rideId: string, userId: string) => {
         throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
     }
 
+    if (existingRide.status === STATUS.COMPLETED || existingRide.status === STATUS.CANCELED) {
+        throw new AppError(httpStatus.BAD_REQUEST, `This ride has already been ${existingRide.status.toLowerCase()}`);
+    }
+
     const currentUser = await User.findById(userId);
 
     if (!currentUser) {
@@ -219,10 +225,6 @@ const completeRide = async (rideId: string, userId: string) => {
         );
     }
 
-    if (existingRide.status === STATUS.COMPLETED) {
-        throw new AppError(httpStatus.BAD_REQUEST, "This ride has already been completed and cannot be updated.");
-    }
-
     const updatedRide = await Ride.findByIdAndUpdate(
         rideId,
         { status: STATUS.COMPLETED, completedAt: new Date() },
@@ -243,9 +245,60 @@ const completeRide = async (rideId: string, userId: string) => {
     return updatedRide;
 };
 
+const cancelRide = async (rideId: string, userId: string) => {
+    const existingRide = await Ride.findById(rideId);
+
+    if (!existingRide) {
+        throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+    }
+
+    if (
+        existingRide.status === STATUS.COMPLETED ||
+        existingRide.status === STATUS.IN_TRANSIT ||
+        existingRide.status === STATUS.PICKED_UP ||
+        existingRide.status === STATUS.CANCELED
+    ) {
+        throw new AppError(httpStatus.BAD_REQUEST, "This ride cannot be canceled");
+    }
+
+    const currentUser = await User.findById(userId);
+
+    if (!currentUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    if (currentUser.role === ROLE.RIDER) {
+        if (!existingRide.rider.equals(currentUser._id)) {
+            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to cancel this ride.");
+        }
+    }
+
+    if (currentUser.role === ROLE.DRIVER) {
+        const isDriverExist = await Driver.findOne({ user: currentUser._id });
+        if (!isDriverExist) {
+            throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+        }
+
+        if (!existingRide.driver?.equals(isDriverExist._id)) {
+            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to cancel this ride.");
+        }
+
+        await Driver.findByIdAndUpdate(existingRide.driver, { currentRide: null });
+    }
+
+    const updatedRide = await Ride.findByIdAndUpdate(
+        rideId,
+        { canceledBy: currentUser.role, status: STATUS.CANCELED, currentRiderId: null },
+        { new: true, runValidators: true }
+    );
+
+    return updatedRide;
+};
+
 export const RideService = {
     requestRide,
     acceptRide,
     updateRideStatus,
     completeRide,
+    cancelRide,
 };

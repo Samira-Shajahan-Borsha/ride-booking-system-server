@@ -7,6 +7,7 @@ export enum STATUS {
     PICKED_UP = "PICKED_UP",
     IN_TRANSIT = "IN_TRANSIT",
     COMPLETED = "COMPLETED",
+    CANCELED = "CANCELED",
 }
 
 export interface IPickUp {
@@ -25,7 +26,7 @@ export interface IRide {
     rider: Types.ObjectId;
     driver?: Types.ObjectId;
     vehicle?: Types.ObjectId;
-    currentRiderId?: Types.ObjectId | null; 
+    currentRiderId?: Types.ObjectId | null;
     status: STATUS;
     pickUp: IPickUp;
     destination: IDestination;
@@ -35,8 +36,6 @@ export interface IRide {
     acceptedAt?: Date;
     pickedUpAt?: Date;
     completedAt?: Date;
-    isCancelled?: boolean;
     canceledBy?: ROLE;
-    canceledAt?: Date;
     rating?: number;
 }

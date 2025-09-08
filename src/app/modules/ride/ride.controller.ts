@@ -58,20 +58,33 @@ const completeRide = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const cancelRide = catchAsync(async (req: Request, res: Response) => {
+    const rideId = req.params.id;
+    const decodedToken = req.user;
+
+    const result = await RideService.cancelRide(rideId, decodedToken.userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Ride canceled successfully",
+        data: result,
+    });
+});
+
 const getAllRide = catchAsync(async (req: Request, res: Response) => {});
 const getMyRides = catchAsync(async (req: Request, res: Response) => {});
 const getMyRide = catchAsync(async (req: Request, res: Response) => {});
 const getSingleRide = catchAsync(async (req: Request, res: Response) => {});
-const cancelRide = catchAsync(async (req: Request, res: Response) => {});
 
 export const RideController = {
     requestRide,
     acceptRide,
     updateRideStatus,
     completeRide,
+    cancelRide,
     getAllRide,
     getMyRides,
     getMyRide,
     getSingleRide,
-    cancelRide,
 };

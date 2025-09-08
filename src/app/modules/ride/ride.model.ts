@@ -8,15 +8,13 @@ const pickUpSchema = new Schema<IPickUp>(
             type: String,
             required: true,
         },
-        type: {
+        /* type: {
             type: String,
             enum: ["Point"],
-            default: "Point",
         },
         coordinates: {
             type: [Number],
-            default: [0, 0],
-        },
+        }, */
     },
     { timestamps: false, versionKey: false, _id: false }
 );
@@ -27,15 +25,13 @@ const destinationSchema = new Schema<IPickUp>(
             type: String,
             required: true,
         },
-        type: {
+        /* type: {
             type: String,
             enum: ["Point"],
-            default: "Point",
         },
         coordinates: {
             type: [Number],
-            default: [0, 0],
-        },
+        }, */
     },
     { timestamps: false, versionKey: false, _id: false }
 );
@@ -91,13 +87,6 @@ const rideSchema = new Schema<IRide>(
             type: Date,
         },
         completedAt: {
-            type: Date,
-        },
-        isCancelled: {
-            type: Boolean,
-            default: false,
-        },
-        canceledAt: {
             type: Date,
         },
         canceledBy: {
