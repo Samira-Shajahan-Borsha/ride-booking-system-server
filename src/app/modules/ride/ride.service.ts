@@ -130,7 +130,62 @@ const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
     }
 };
 
+const updateRideStatus = async (rideId: string, userId: string, payload: Partial<IRide>) => {
+    const existingRide = await Ride.findById(rideId);
+
+    if (!existingRide) {
+        throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+    }
+
+    if (existingRide.status === STATUS.COMPLETED) {
+        throw new AppError(httpStatus.BAD_REQUEST, "You can not update the completed ride status");
+    }
+
+    const currentUser = await User.findById(userId);
+
+    if (!currentUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    const isDriverExist = await Driver.findOne({ user: currentUser._id });
+
+    if (!isDriverExist) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    if (!existingRide.driver?.equals(isDriverExist._id)) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to update the status of this ride.");
+    }
+
+    if (
+        isDriverExist.approvalStatus === APPROVAL_STATUS.PENDING ||
+        isDriverExist.approvalStatus === APPROVAL_STATUS.SUSPEND
+    ) {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            "You cannot update this ride. You driving account has not been approved."
+        );
+    }
+
+    const rideUpdateStatusPayload =
+        payload.status === STATUS.PICKED_UP
+            ? {
+                  status: STATUS.PICKED_UP,
+                  pickedUpAt: new Date(),
+              }
+            : { status: payload.status };
+
+    const updatedRide = await Ride.findByIdAndUpdate(
+        rideId,
+        { $set: rideUpdateStatusPayload },
+        { new: true, runValidators: true }
+    ).select("-destination -pickUp");
+
+    return updatedRide;
+};
+
 export const RideService = {
     requestRide,
     acceptRide,
+    updateRideStatus,
 };

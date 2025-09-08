@@ -103,6 +103,7 @@ const rideSchema = new Schema<IRide>(
         canceledBy: {
             type: String,
             enum: Object.values(ROLE),
+            default: null,
         },
         rating: {
             type: Number,

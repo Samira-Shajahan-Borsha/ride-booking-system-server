@@ -9,3 +9,4 @@ To do:
 -   handle forgot password
 -   handle send otp / verify otp, when a new user registers. isVerified will be true.
 -   same api for approve/suspend or, different api needed ?
+-   check zod schema ride status for accept ride
