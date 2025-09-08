@@ -1,18 +1,19 @@
 import AppError from "../../errorHelpers/AppError";
-import { APPROVAL_STATUS, IDriver, IS_AVAILABLE } from "./driver.interface";
+import { QueryBuilder } from "../../utils/QueryBuilder";
+import { APPROVAL_STATUS, IDriver } from "./driver.interface";
 import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
 
-const getAllDrivers = async () => {
-    const drivers = await Driver.find({});
+const getAllDrivers = async (query: Record<string, string>) => {
+    const queryBuilder = new QueryBuilder(Driver.find(), query);
 
-    const totalDrivers = await Driver.countDocuments();
+    const drivers = await queryBuilder.filter().sort().fields().paginate();
+
+    const [data, meta] = await Promise.all([drivers.build().populate("user", "name email"), queryBuilder.getMeta()]);
 
     return {
-        data: drivers,
-        meta: {
-            total: totalDrivers,
-        },
+        data,
+        meta,
     };
 };
 
@@ -24,6 +25,16 @@ const getMyProfile = async (userId: string) => {
     }
 
     return isDriverExist;
+};
+
+const getMyEarning = async (userId: string) => {
+    const existingDriver = await Driver.findOne({ user: userId }).select("totalEarnings");
+
+    if (!existingDriver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    return existingDriver;
 };
 
 const approveDriver = async (driverId: string) => {
@@ -81,6 +92,13 @@ const updateAvailableStatus = async (userId: string, driverId: string, payload: 
         throw new AppError(httpStatus.FORBIDDEN, "You are not authorized to access other driver profile");
     }
 
+    if (
+        existingDriver.approvalStatus === APPROVAL_STATUS.PENDING ||
+        existingDriver.approvalStatus === APPROVAL_STATUS.SUSPEND
+    ) {
+        throw new AppError(httpStatus.FORBIDDEN, "Your profile is not accessible until it has been approved");
+    }
+
     if (existingDriver.isAvailable === payload.isAvailable) {
         throw new AppError(
             httpStatus.BAD_REQUEST,
@@ -112,6 +130,7 @@ const getSingleDriver = async (driverId: string) => {
 export const DriverService = {
     getAllDrivers,
     getMyProfile,
+    getMyEarning,
     approveDriver,
     suspendDriver,
     updateAvailableStatus,

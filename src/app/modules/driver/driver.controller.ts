@@ -6,7 +6,8 @@ import { DriverService } from "./driver.service";
 import { JwtPayload } from "jsonwebtoken";
 
 const getAllDrivers = catchAsync(async (req: Request, res: Response) => {
-    const result = await DriverService.getAllDrivers();
+    const query = req.query;
+    const result = await DriverService.getAllDrivers(query as Record<string, string>);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
@@ -26,6 +27,19 @@ const getMyProfile = catchAsync(async (req: Request, res: Response) => {
         statusCode: httpStatus.OK,
         success: true,
         message: "Your driving profile retrieved successfully",
+        data: result,
+    });
+});
+
+const getMyEarning = catchAsync(async (req: Request, res: Response) => {
+    const decodedToken = req.user as JwtPayload;
+
+    const result = await DriverService.getMyEarning(decodedToken.userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Your earning retrieved successfully",
         data: result,
     });
 });
@@ -85,6 +99,7 @@ const getSingleDriver = catchAsync(async (req: Request, res: Response) => {
 export const DriverController = {
     getAllDrivers,
     getMyProfile,
+    getMyEarning,
     approveDriver,
     suspendDriver,
     updateAvailableStatus,
