@@ -55,9 +55,11 @@ const driverSchema = new Schema<IDriver>(
         vehicle: {
             type: Schema.Types.ObjectId,
             ref: "Vehicle",
+            default: null,
         },
         rating: {
             type: Number,
+            default: null,
         },
     },
     { versionKey: false, timestamps: true }

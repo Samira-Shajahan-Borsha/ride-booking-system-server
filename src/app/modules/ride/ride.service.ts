@@ -7,6 +7,7 @@ import { BASE_FARE, PER_KM_RATE } from "./ride.constant";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
 import { ROLE } from "../user/user.interface";
+import { JwtPayload } from "jsonwebtoken";
 
 const requestRide = async (payload: IRide, riderId: string) => {
     const { rider, distance, ...rest } = payload;
@@ -295,10 +296,29 @@ const cancelRide = async (rideId: string, userId: string) => {
     return updatedRide;
 };
 
+const getMyRides = async (decodedToken: JwtPayload) => {
+    const existingUser = await User.findById(decodedToken.userId);
+
+    if (!existingUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    if (existingUser.role === ROLE.DRIVER) {
+        const driver = await Driver.findOne({ user: existingUser._id });
+        const rides = await Ride.find({ driver: driver?._id, status: STATUS.COMPLETED });
+        return rides;
+    }
+
+    const rides = await Ride.find({ rider: existingUser?._id });
+
+    return rides;
+};
+
 export const RideService = {
     requestRide,
     acceptRide,
     updateRideStatus,
     completeRide,
     cancelRide,
+    getMyRides,
 };

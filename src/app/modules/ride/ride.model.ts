@@ -46,14 +46,17 @@ const rideSchema = new Schema<IRide>(
         driver: {
             type: Schema.Types.ObjectId,
             ref: "Driver",
+            default: null,
         },
         vehicle: {
             type: Schema.Types.ObjectId,
             ref: "Vehicle",
+            default: null,
         },
         currentRiderId: {
             type: Schema.Types.ObjectId || null,
             ref: "User",
+            default: null,
         },
         status: {
             type: String,
@@ -82,12 +85,15 @@ const rideSchema = new Schema<IRide>(
         },
         acceptedAt: {
             type: Date,
+            default: null,
         },
         pickedUpAt: {
             type: Date,
+            default: null,
         },
         completedAt: {
             type: Date,
+            default: null,
         },
         canceledBy: {
             type: String,
@@ -96,6 +102,7 @@ const rideSchema = new Schema<IRide>(
         },
         rating: {
             type: Number,
+            default: null,
         },
     },
     { versionKey: false, timestamps: true }

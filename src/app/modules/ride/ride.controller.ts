@@ -72,8 +72,20 @@ const cancelRide = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getMyRides = catchAsync(async (req: Request, res: Response) => {
+    const decodedToken = req.user;
+
+    const result = await RideService.getMyRides(decodedToken);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Your all rides retrieved successfully",
+        data: result,
+    });
+});
+
 const getAllRide = catchAsync(async (req: Request, res: Response) => {});
-const getMyRides = catchAsync(async (req: Request, res: Response) => {});
 const getMyRide = catchAsync(async (req: Request, res: Response) => {});
 const getSingleRide = catchAsync(async (req: Request, res: Response) => {});
 

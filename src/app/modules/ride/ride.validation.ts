@@ -9,7 +9,7 @@ export const requestRideZodSchema = z.object({
     destination: z.object({
         address: z.string(),
     }),
-    distance: z.number(),
+    distance: z.number().min(1),
 });
 
 export const acceptRideZodSchema = z.object({
