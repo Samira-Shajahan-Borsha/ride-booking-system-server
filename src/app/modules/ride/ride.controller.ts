@@ -6,11 +6,26 @@ import { RideService } from "./ride.service";
 
 const requestRide = catchAsync(async (req: Request, res: Response) => {
     const decodedToken = req.user;
+
     const result = await RideService.requestRide(req.body, decodedToken.userId);
+
     sendResponse(res, {
         statusCode: httpStatus.CREATED,
         success: true,
         message: "Ride request created successfully",
+        data: result,
+    });
+});
+
+const acceptRide = catchAsync(async (req: Request, res: Response) => {
+    const rideId = req.params.id;
+    const decodedToken = req.user;
+    const result = await RideService.acceptRide(rideId, req.body, decodedToken.userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Ride accepted successfully",
         data: result,
     });
 });
@@ -24,6 +39,7 @@ const cancelRide = catchAsync(async (req: Request, res: Response) => {});
 
 export const RideController = {
     requestRide,
+    acceptRide,
     getAllRide,
     getMyRides,
     getMyRide,

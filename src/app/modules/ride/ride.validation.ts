@@ -10,3 +10,7 @@ export const requestRideZodSchema = z.object({
     }),
     distance: z.number(),
 });
+
+export const acceptRideZodSchema = z.object({
+    driver: z.string(),
+});

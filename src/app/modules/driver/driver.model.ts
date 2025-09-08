@@ -46,6 +46,11 @@ const driverSchema = new Schema<IDriver>(
             },
             default: APPROVAL_STATUS.PENDING,
         },
+        currentRide: {
+            type: Schema.Types.ObjectId,
+            ref: "Ride",
+            default: null,
+        },
         location: locationSchema,
         vehicle: {
             type: Schema.Types.ObjectId,

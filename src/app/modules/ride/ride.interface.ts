@@ -25,7 +25,7 @@ export interface IRide {
     rider: Types.ObjectId;
     driver?: Types.ObjectId;
     vehicle?: Types.ObjectId;
-    currentRiderId?: Types.ObjectId | null;
+    currentRiderId?: Types.ObjectId | null; 
     status: STATUS;
     pickUp: IPickUp;
     destination: IDestination;
