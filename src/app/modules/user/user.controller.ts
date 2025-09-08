@@ -17,7 +17,8 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-    const result = await UserService.getAllUsers();
+    const query = req.query;
+    const result = await UserService.getAllUsers(query as Record<string, string>);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,

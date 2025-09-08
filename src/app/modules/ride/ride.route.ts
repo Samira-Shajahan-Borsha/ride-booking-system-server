@@ -9,7 +9,7 @@ const router = Router();
 
 router.post("/request", validateRequest(requestRideZodSchema), checkAuth(ROLE.RIDER), RideController.requestRide);
 router.get("/all-ride", checkAuth(ROLE.SUPER_ADMIN, ROLE.ADMIN), RideController.getAllRide);
-router.get("/me", checkAuth(...Object.values(ROLE)), RideController.getMyRides);
+router.get("/me", checkAuth(ROLE.RIDER, ROLE.DRIVER), RideController.getMyRides);
 router.patch("/accept/:id", validateRequest(acceptRideZodSchema), checkAuth(ROLE.DRIVER), RideController.acceptRide);
 router.patch(
     "/status/:id",

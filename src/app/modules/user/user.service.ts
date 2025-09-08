@@ -8,6 +8,8 @@ import { User } from "./user.model";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
 import { JwtPayload } from "jsonwebtoken";
+import { QueryBuilder } from "../../utils/QueryBuilder";
+import { userSearchableFields } from "./user.constant";
 
 const createUser = async (payload: Partial<IUser>) => {
     const session = await User.startSession();
@@ -68,21 +70,21 @@ const createUser = async (payload: Partial<IUser>) => {
     }
 };
 
-const getAllUsers = async () => {
-    const allUsers = await User.find({});
+const getAllUsers = async (query: Record<string, string>) => {
+    const queryBuilder = new QueryBuilder(User.find(), query);
 
-    const users = allUsers?.map((user) => {
+    const users = await queryBuilder.search(userSearchableFields).filter().sort().fields().paginate();
+
+    const [data, meta] = await Promise.all([users.build(), queryBuilder.getMeta()]);
+
+    const userData = data?.map((user) => {
         const { password, ...usersWithoutPassword } = user.toObject();
         return usersWithoutPassword;
     });
 
-    const totalUsers = await User.countDocuments();
-
     return {
-        data: users,
-        meta: {
-            total: totalUsers,
-        },
+        data: userData,
+        meta: meta,
     };
 };
 

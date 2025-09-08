@@ -8,7 +8,7 @@ import { ROLE } from "./user.interface";
 const router = Router();
 
 router.post("/register", validateRequest(createUserZodSchema), UserController.createUser);
-router.get("/get-users", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.getAllUsers);
+router.get("/all-users", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.getAllUsers);
 router.get("/me", checkAuth(...Object.values(ROLE)), UserController.getMe);
 
 router.get("/:id", checkAuth(ROLE.SUPER_ADMIN, ROLE.ADMIN), UserController.getUser);
