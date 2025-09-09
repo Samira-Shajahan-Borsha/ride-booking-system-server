@@ -7,8 +7,8 @@ import { generateToken, verifyToken } from "../../utils/jwt";
 import { envVars } from "../../config/env";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
-import { createTokens } from "../../utils/userTokens";
 import { JwtPayload } from "jsonwebtoken";
+import { createTokens } from '../../utils/usertokens';
 
 const credentialsLogin = async (payload: Partial<IUser>) => {
     const { email, password: plainPassword } = payload;

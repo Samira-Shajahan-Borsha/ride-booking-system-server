@@ -11,11 +11,11 @@ export enum APPROVAL_STATUS {
     APPROVED = "APPROVED",
 }
 
-export interface ILocation {
+/* export interface ILocation {
     address: string;
     type?: "Point";
     coordinates?: [number, number];
-}
+} */
 
 export interface IDriver {
     user: Types.ObjectId;

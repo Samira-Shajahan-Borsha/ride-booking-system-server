@@ -16,6 +16,8 @@ This backend system enables seamless ride booking and management for riders, dri
 
 ## 🔗 Links & API Testing
 
+-   **Live Server:** [https://backend-ride-booking-system-ecru.vercel.app](https://https://backend-ride-booking-system-ecru.vercel.app/)
+
 **Super Admin Test Credentials:**
 
 ```

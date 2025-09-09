@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { APPROVAL_STATUS, IDriver, ILocation, IS_AVAILABLE } from "./driver.interface";
+import { APPROVAL_STATUS, IDriver, IS_AVAILABLE } from "./driver.interface";
 
 /* const locationSchema = new Schema<ILocation>(
     {
