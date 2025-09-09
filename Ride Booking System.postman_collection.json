@@ -1,0 +1,3525 @@
+{
+	"info": {
+		"_postman_id": "1134e4d1-9d95-4d79-95f0-b5d6d49ce73a",
+		"name": "Ride Booking System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31730860"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    /* \"name\": \"R\",\r\n    \"email\": \"r@gmail.com\",\r\n    \"role\": \"RIDER\",\r\n    \"password\": \"12\" */\r\n    \"name\": \"samira\",\r\n    \"email\": \"samira40@gmail.com\",\r\n    \"role\": \"RIDER\",\r\n    \"password\": \"1234S@Samira\"\r\n    /* \"name\": \"  Arif \",\r\n    \"email\": \"arif@gmail.com\",\r\n    \"role\": \"DRIVER\",\r\n    \"password\": \"1234@Arif\" */\r\n    /* \"name\": \"  Kabir \",\r\n    \"email\": \"kabir@gmail.com\",\r\n    \"role\": \"DRIVER\",\r\n    \"password\": \"1234@Kabir\" */\r\n    /* \"name\": \"  Rajib \",\r\n    \"email\": \"rajib@gmail.com\",\r\n    \"role\": \"DRIVER\",\r\n    \"password\": \"1234@Rajib\" */\r\n    /* \"name\": \"  Stefan \",\r\n    \"email\": \"stefan@gmail.com\",\r\n    \"role\": \"RIDER\",\r\n    \"password\": \"1234@Stefan\" */\r\n    /* \"name\": \"  Damon \",\r\n    \"email\": \"damon@gmail.com\",\r\n    \"role\": \"RIDER\",\r\n    \"password\": \"1234@Damon\" */\r\n    /* \"name\": \"Stefan\",\r\n    \"email\": \"stefan@gmail.com\",\r\n    \"role\": \"RIDER\",\r\n    \"password\": \"1234@Stefan\" */\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"name\": \"samira\",\r\n    // \"email\": \"samira41@gmail.com\",\r\n    // \"role\": \"RIDER\",\r\n    // \"password\": \"1234S@mi\"\r\n    // \"name\": \"  Arif \",\r\n    // \"email\": \"arif@gmail.com\",\r\n    // \"role\": \"DRIVER\",\r\n    // \"password\": \"1234@Arif\"\r\n    \"name\": \"  Samira  \",\r\n    \"email\": \"samira@gmail.com\",\r\n    \"role\": \"ADMIN\",\r\n    \"password\": \"1234@Samira\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "375"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"177-PlmVI8Sf95cxWe7S4lHCdN5Ivl4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 16:37:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 201,\n    \"success\": true,\n    \"message\": \"User created successfully\",\n    \"data\": {\n        \"name\": \"Samira\",\n        \"email\": \"samira@gmail.com\",\n        \"role\": \"ADMIN\",\n        \"isVerified\": false,\n        \"isActive\": \"ACTIVE\",\n        \"isDeleted\": false,\n        \"auths\": [\n            {\n                \"provider\": \"credentials\",\n                \"providerId\": \"samira@gmail.com\"\n            }\n        ],\n        \"_id\": \"68bc63573be61cf56e40c2e4\",\n        \"createdAt\": \"2025-09-06T16:37:43.588Z\",\n        \"updatedAt\": \"2025-09-06T16:37:43.588Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1NjEzMiwiZXhwIjoxNzU3NDQyNTMyfQ.drO-I6L_4co1adEkF_Dw7w5nIg-aJWTWe8y3XlIWu9w",
+								"description": "Super Admin",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/all-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"all-users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "samira@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "DRIVER",
+									"disabled": true
+								},
+								{
+									"key": "searchTerm",
+									"value": "samira",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "name",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "name,email",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1NjEzMiwiZXhwIjoxNzU3NDQyNTMyfQ.drO-I6L_4co1adEkF_Dw7w5nIg-aJWTWe8y3XlIWu9w",
+										"description": "Super Admin",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/v1/users/all-users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"all-users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "samira@gmail.com",
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": "DRIVER",
+											"disabled": true
+										},
+										{
+											"key": "searchTerm",
+											"value": "samira",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "name",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "fields",
+											"value": "name,email",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2518"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9d6-006x4RnBNr+V00aziM4YTVZ6Jds\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 22:24:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"All users retrieved successfully\",\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 8,\n        \"totalPage\": 1\n    },\n    \"data\": [\n        {\n            \"_id\": \"68bf204ca7cdc9c24d03630a\",\n            \"name\": \"Rajib\",\n            \"email\": \"rajib@gmail.com\",\n            \"role\": \"DRIVER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"rajib@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-08T18:28:28.276Z\",\n            \"updatedAt\": \"2025-09-08T18:28:28.276Z\"\n        },\n        {\n            \"_id\": \"68bf2043a7cdc9c24d036305\",\n            \"name\": \"Kabir\",\n            \"email\": \"kabir@gmail.com\",\n            \"role\": \"DRIVER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"kabir@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-08T18:28:19.704Z\",\n            \"updatedAt\": \"2025-09-08T18:28:19.704Z\"\n        },\n        {\n            \"_id\": \"68bf2017a7cdc9c24d036300\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"role\": \"DRIVER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"arif@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-08T18:27:35.066Z\",\n            \"updatedAt\": \"2025-09-08T18:27:35.066Z\"\n        },\n        {\n            \"_id\": \"68beb2b5d36eb4c3e6bd581b\",\n            \"name\": \"Damon\",\n            \"email\": \"damon@gmail.com\",\n            \"role\": \"RIDER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"damon@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-08T10:40:53.736Z\",\n            \"updatedAt\": \"2025-09-08T10:40:53.736Z\"\n        },\n        {\n            \"_id\": \"68beb2a1d36eb4c3e6bd5818\",\n            \"name\": \"Stefan\",\n            \"email\": \"stefan@gmail.com\",\n            \"role\": \"RIDER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"stefan@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-08T10:40:33.288Z\",\n            \"updatedAt\": \"2025-09-08T10:40:33.288Z\"\n        },\n        {\n            \"_id\": \"68bc8ac6b0067f6d38e9e3c7\",\n            \"name\": \"Super Admin\",\n            \"email\": \"super@gmail.com\",\n            \"role\": \"SUPER_ADMIN\",\n            \"isVerified\": true,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"super@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-06T19:25:58.415Z\",\n            \"updatedAt\": \"2025-09-06T19:25:58.415Z\"\n        },\n        {\n            \"_id\": \"68bc7fd142e52e4554fc8a26\",\n            \"name\": \"Samiraaa\",\n            \"email\": \"samira40@gmail.com\",\n            \"role\": \"ADMIN\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"samira40@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-06T18:39:13.821Z\",\n            \"updatedAt\": \"2025-09-06T19:28:50.337Z\"\n        },\n        {\n            \"_id\": \"68bc63573be61cf56e40c2e4\",\n            \"name\": \"Samira\",\n            \"email\": \"samira@gmail.com\",\n            \"role\": \"ADMIN\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"samira@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-06T16:37:43.588Z\",\n            \"updatedAt\": \"2025-09-06T16:37:43.588Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxNzY5OTMsImV4cCI6MTc1NzI2MzM5M30.NdQxHgwwPaUSNwhyXEDfe1HXIIjZN65HYWAS8DhGnzI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/68bc63573be61cf56e40c2e4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"68bc63573be61cf56e40c2e4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxNzY3MjUsImV4cCI6MTc1NzI2MzEyNX0.C1Zm57I-9xtO03jHsiRsvIZ-8EDxY_HaY2VBXi7AcKA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/user/68bc3aed57dc205a8cbe6ea3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"68bc3aed57dc205a8cbe6ea3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "372"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"174-kolt1qRLlPH7d7zr+KKaLUXmac0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 16:41:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"User retrieved successfully\",\n    \"data\": {\n        \"_id\": \"68bc3aed57dc205a8cbe6ea3\",\n        \"name\": \"Arif\",\n        \"email\": \"arif@gmail.com\",\n        \"role\": \"DRIVER\",\n        \"isVerified\": false,\n        \"isActive\": \"ACTIVE\",\n        \"isDeleted\": false,\n        \"auths\": [\n            {\n                \"provider\": \"credentials\",\n                \"providerId\": \"arif@gmail.com\"\n            }\n        ],\n        \"createdAt\": \"2025-09-06T13:45:17.452Z\",\n        \"updatedAt\": \"2025-09-06T13:45:17.452Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxNzY5OTMsImV4cCI6MTc1NzI2MzM5M30.NdQxHgwwPaUSNwhyXEDfe1HXIIjZN65HYWAS8DhGnzI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get me",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxNzY5OTMsImV4cCI6MTc1NzI2MzM5M30.NdQxHgwwPaUSNwhyXEDfe1HXIIjZN65HYWAS8DhGnzI",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/user/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "385"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"181-yCFkZqcR8tNyTUNc3OLCY+Hne0c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 16:55:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Your profile retrieved successfully\",\n    \"data\": {\n        \"_id\": \"68bc63573be61cf56e40c2e4\",\n        \"name\": \"Samira\",\n        \"email\": \"samira@gmail.com\",\n        \"role\": \"ADMIN\",\n        \"isVerified\": false,\n        \"isActive\": \"ACTIVE\",\n        \"isDeleted\": false,\n        \"auths\": [\n            {\n                \"provider\": \"credentials\",\n                \"providerId\": \"samira@gmail.com\"\n            }\n        ],\n        \"createdAt\": \"2025-09-06T16:37:43.588Z\",\n        \"updatedAt\": \"2025-09-06T16:37:43.588Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxODUwNDMsImV4cCI6MTc1NzI3MTQ0M30.sioPCfaI4VQFWtgS6qWnmeb91yu65uzxl2mvCu4kWTA",
+								"description": "admin",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjM2FlZDU3ZGMyMDVhOGNiZTZlYTMiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE4MzE4OSwiZXhwIjoxNzU3MjY5NTg5fQ.ruam9GiiGZ0qGa-meBSGUHZUCGwMblhxVtgfqdqDaO8",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjN2ZkMTQyZTUyZTQ1NTRmYzhhMjYiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE4NDI4NiwiZXhwIjoxNzU3MjcwNjg2fQ.j1VV1S96iZyM3XinrifOyKU6R0HmwJeGxktse7I5KIQ",
+								"description": "rider",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzE4NjgyMCwiZXhwIjoxNzU3MjczMjIwfQ.hnPD44wjSK8YRLBQm5LBlZj3KxM6Qm4INTaXFLsgX7o",
+								"description": "super admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\" : \"ADMIN\",\r\n    \"isActive\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/68bc8ac6b0067f6d38e9e3c7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"68bc8ac6b0067f6d38e9e3c7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxODUwNDMsImV4cCI6MTc1NzI3MTQ0M30.sioPCfaI4VQFWtgS6qWnmeb91yu65uzxl2mvCu4kWTA",
+										"description": "admin",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjM2FlZDU3ZGMyMDVhOGNiZTZlYTMiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE4MzE4OSwiZXhwIjoxNzU3MjY5NTg5fQ.ruam9GiiGZ0qGa-meBSGUHZUCGwMblhxVtgfqdqDaO8",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjN2ZkMTQyZTUyZTQ1NTRmYzhhMjYiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE4NDI4NiwiZXhwIjoxNzU3MjcwNjg2fQ.j1VV1S96iZyM3XinrifOyKU6R0HmwJeGxktse7I5KIQ",
+										"description": "rider",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\" : \"ADMIN\",\r\n    \"isActive\": \"ACTIVE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/user/68bc7fd142e52e4554fc8a26",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"68bc7fd142e52e4554fc8a26"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "381"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"17d-ZgWQaVktf2sPRPN5yMUjhO+IWro\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 18:58:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"User updated successfully\",\n    \"data\": {\n        \"_id\": \"68bc7fd142e52e4554fc8a26\",\n        \"name\": \"Samiraaa\",\n        \"email\": \"samira40@gmail.com\",\n        \"role\": \"ADMIN\",\n        \"isVerified\": false,\n        \"isActive\": \"ACTIVE\",\n        \"isDeleted\": false,\n        \"auths\": [\n            {\n                \"provider\": \"credentials\",\n                \"providerId\": \"samira40@gmail.com\"\n            }\n        ],\n        \"createdAt\": \"2025-09-06T18:39:13.821Z\",\n        \"updatedAt\": \"2025-09-06T18:58:10.913Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User Credential Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    /* \"email\": \"samira40@gmail.com\",\r\n    \"password\": \"1234S@Samira\" */\r\n    /* \"email\": \"stefan@gmail.com\",\r\n    \"password\": \"1234@Stefan\" */\r\n    /* \"email\": \"damon@gmail.com\",\r\n    \"password\": \"1234@Damon\" */\r\n    /* \"email\": \"samira@gmail.com\",\r\n    \"password\": \"1234@Samira\" */\r\n    \"email\": \"super@gmail.com\",\r\n    \"password\": \"12345678\"\r\n    /* \"email\": \"arif@gmail.com\",\r\n    \"password\": \"1234@Arif\" */\r\n   /*  \"email\": \"rajib@gmail.com\",\r\n    \"password\": \"1234@Rajib\" */\r\n    /* \"email\": \"kabir@gmail.com\",\r\n    \"password\": \"1234@Kabir\" */\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "# Login API\n\nThis endpoint is used to authenticate a user and obtain access and refresh tokens. It allows users to log in by providing their email and password.\n\n## Endpoint\n\n`POST {{base_url}}/api/v1/auth/login`\n\n## Request Parameters\n\nThe request body must be in JSON format and include the following parameters:\n\n- **email** (string): The email address of the user attempting to log in.\n    \n- **password** (string): The password associated with the user's account.\n    \n\n### Example Request Body\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"password\": \"yourpassword\"\n}\n\n ```\n\n## Response Format\n\nOn a successful login, the server will respond with a status code of `200` and a response body in JSON format containing the following fields:\n\n- **statusCode** (integer): Indicates the status of the response.\n    \n- **success** (boolean): Indicates whether the login was successful.\n    \n- **message** (string): A message providing additional context (may be empty).\n    \n- **data** (object): Contains the following information:\n    \n    - **accessToken** (string): The token used for authentication in subsequent requests.\n        \n    - **refreshToken** (string): The token used to obtain a new access token when the current one expires.\n        \n    - **user** (object): Contains user details:\n        \n        - **_id** (string): The unique identifier for the user.\n            \n        - **name** (string): The name of the user.\n            \n        - **email** (string): The email address of the user.\n            \n        - **role** (string): The role of the user within the system.\n            \n        - **isVerified** (boolean): Indicates if the user's email is verified.\n            \n        - **isActive** (string): Indicates if the user's account is active.\n            \n        - **isDeleted** (boolean): Indicates if the user's account is deleted.\n            \n        - **auths** (array): An array of authentication providers used by the user, containing:\n            \n            - **provider** (string): The name of the authentication provider.\n                \n            - **providerId** (string): The unique identifier from the authentication provider.\n                \n        - **createdAt** (string): The timestamp of when the user was created.\n            \n        - **updatedAt** (string): The timestamp of the last update to the user.\n            \n\n### Example Response\n\n``` json\n{\n  \"statusCode\": 0,\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"accessToken\": \"your_access_token\",\n    \"refreshToken\": \"your_refresh_token\",\n    \"user\": {\n      \"_id\": \"user_id\",\n      \"name\": \"User Name\",\n      \"email\": \"user@example.com\",\n      \"role\": \"user_role\",\n      \"isVerified\": true,\n      \"isActive\": \"active_status\",\n      \"isDeleted\": false,\n      \"auths\": [\n        {\n          \"provider\": \"provider_name\",\n          \"providerId\": \"provider_id\"\n        }\n      ],\n      \"createdAt\": \"timestamp\",\n      \"updatedAt\": \"timestamp\"\n    }\n  }\n}\n\n ```\n\n## Notes\n\n- Ensure that the email and password are correct to successfully authenticate the user.\n    \n- The tokens received can be used for subsequent API calls that require authentication.\n    \n\nThis endpoint allows users to authenticate and log in to their account by providing their credentials. Upon successful authentication, the server responds with an access token and user information.\n\n### Request\n\n- **Method:** POST\n    \n- **Endpoint:** `{{base_url}}/api/v1/auth/login`\n    \n- **Content-Type:** application/json\n    \n\n### Request Body\n\nThe request body should be in JSON format and include the following parameters:\n\n- **email** (string): The email address of the user attempting to log in.\n    \n- **password** (string): The password associated with the user's account.\n    \n\n#### Example Request Body\n\n``` json\n{\n  \"email\": \"user@example.com\",\n  \"password\": \"yourpassword\"\n}\n\n ```\n\n### Response\n\n- **Status Code:** 200 OK\n    \n- **Content-Type:** text/xml (although the response is in JSON format)\n    \n\n#### Expected Response Format\n\nOn successful login, the response will contain the following structure:\n\n``` json\n{\n  \"statusCode\": 0,\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"accessToken\": \"string\",\n    \"refreshToken\": \"string\",\n    \"user\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"role\": \"string\",\n      \"isVerified\": true,\n      \"isActive\": \"string\",\n      \"isDeleted\": true,\n      \"auths\": [\n        {\n          \"provider\": \"string\",\n          \"providerId\": \"string\"\n        }\n      ],\n      \"createdAt\": \"string\",\n      \"updatedAt\": \"string\"\n    }\n  }\n}\n\n ```\n\n### Notes\n\n- The `accessToken` and `refreshToken` are essential for maintaining the user's session and should be stored securely.\n    \n- The `user` object contains important information about the authenticated user, including their verification status and roles.\n    \n\nThis endpoint allows users to authenticate by logging in with their email and password.\n\n### Request\n\n- **Method**: POST\n    \n- **Endpoint**: `{{base_url}}/api/v1/auth/login`\n    \n- **Request Body**: The request must include the following parameters in JSON format:\n    \n    - `email` (string): The email address of the user attempting to log in.\n        \n    - `password` (string): The password associated with the user's account.\n        \n\n#### Example Request Body\n\n``` json\n{\n  \"email\": \"super@gmail.com\",\n  \"password\": \"12345678\"\n}\n\n ```\n\n### Response\n\nOn a successful login, the server responds with a status code of `200` and a content type of `text/xml`. The response body contains a JSON object with the following structure:\n\n- `statusCode` (integer): Indicates the status of the request.\n    \n- `success` (boolean): A flag indicating whether the login was successful.\n    \n- `message` (string): A message providing additional information about the request.\n    \n- `data` (object): Contains the following fields:\n    \n    - `accessToken` (string): The token used for subsequent authenticated requests.\n        \n    - `refreshToken` (string): The token used to refresh the access token.\n        \n    - `user` (object): Information about the authenticated user, including:\n        \n        - `_id` (string): The unique identifier of the user.\n            \n        - `name` (string): The name of the user.\n            \n        - `email` (string): The email of the user.\n            \n        - `role` (string): The role assigned to the user.\n            \n        - `isVerified` (boolean): Indicates if the user's email is verified.\n            \n        - `isActive` (string): Indicates if the user's account is active.\n            \n        - `isDeleted` (boolean): Indicates if the user's account is deleted.\n            \n        - `auths` (array): An array of authentication methods used by the user, each containing:\n            \n            - `provider` (string): The provider of the authentication method.\n                \n            - `providerId` (string): The identifier associated with the provider.\n                \n        - `createdAt` (string): The timestamp of when the user was created.\n            \n        - `updatedAt` (string): The timestamp of the last update to the user.\n            \n\n#### Example Response\n\n``` json\n{\n  \"statusCode\": 0,\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"accessToken\": \"\",\n    \"refreshToken\": \"\",\n    \"user\": {\n      \"_id\": \"\",\n      \"name\": \"\",\n      \"email\": \"\",\n      \"role\": \"\",\n      \"isVerified\": true,\n      \"isActive\": \"\",\n      \"isDeleted\": true,\n      \"auths\": [\n        {\n          \"provider\": \"\",\n          \"providerId\": \"\"\n        }\n      ],\n      \"createdAt\": \"\",\n      \"updatedAt\": \"\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "User Credential Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"email\": \"samira122@gmail.com\",\r\n    // \"password\": \"1234S@mi\"\r\n    \"email\": \"samira40@gmail.com\",\r\n    \"password\": \"1234@Samira\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI0NWU5YzM5NDM3ZjJiOTYzN2Q2ZmIiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE3MzYwNywiZXhwIjoxNzU3MjYwMDA3fQ.lExB4i2Kf9ypcFGZqmwvRHrb2skulqOlGoZd_U9Gxwo; Path=/; HttpOnly"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI0NWU5YzM5NDM3ZjJiOTYzN2Q2ZmIiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE3MzYwNywiZXhwIjoxNzU5NzY1NjA3fQ.E9anEANfEagEd42nWN7guNpmoQcOtPv9f-rTafLLQ60; Path=/; HttpOnly"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "895"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37f-5e3w+K0kcIdRMk8Cq2Xr6ia9dtI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 15:46:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"User logged in successfully\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI0NWU5YzM5NDM3ZjJiOTYzN2Q2ZmIiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE3MzYwNywiZXhwIjoxNzU3MjYwMDA3fQ.lExB4i2Kf9ypcFGZqmwvRHrb2skulqOlGoZd_U9Gxwo\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI0NWU5YzM5NDM3ZjJiOTYzN2Q2ZmIiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE3MzYwNywiZXhwIjoxNzU5NzY1NjA3fQ.E9anEANfEagEd42nWN7guNpmoQcOtPv9f-rTafLLQ60\",\n        \"user\": {\n            \"_id\": \"68b45e9c39437f2b9637d6fb\",\n            \"name\": \"samira\",\n            \"email\": \"samira40@gmail.com\",\n            \"role\": \"RIDER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"samira40@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-08-31T14:39:24.066Z\",\n            \"updatedAt\": \"2025-09-06T15:26:16.912Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/auth/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56-XrRUdx0Ldp/3oL9MGEf2hr15COg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 15:27:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"User logged out successfully\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "New Access Token / Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Access Token / Refresh Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/auth/refresh-token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"refresh-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjM2FlZDU3ZGMyMDVhOGNiZTZlYTMiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE3MTEzNSwiZXhwIjoxNzU3MjU3NTM1fQ.n0gGq-IbLCEbQ5xJYWuLPTRSWoYs1Ka4UaiXZ050Qwo; Path=/; HttpOnly"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=undefined; Path=/; HttpOnly"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "338"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"152-JMVktRqQfvPNVizUjaU2EIZA0Ac\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 15:05:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Access token generated successfully\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjM2FlZDU3ZGMyMDVhOGNiZTZlYTMiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE3MTEzNSwiZXhwIjoxNzU3MjU3NTM1fQ.n0gGq-IbLCEbQ5xJYWuLPTRSWoYs1Ka4UaiXZ050Qwo\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI0NWU5YzM5NDM3ZjJiOTYzN2Q2ZmIiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE3MjE5NSwiZXhwIjoxNzU3MjU4NTk1fQ.f5Pre4tLpmrWfRvQdidBdtl9WsCY5jnI94E30BNqCc0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\" : \"1234@Samira\",\r\n    \"newPassword\": \"12345@Samira\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Change Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGI0NWU5YzM5NDM3ZjJiOTYzN2Q2ZmIiLCJlbWFpbCI6InNhbWlyYTQwQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzE3MjE5NSwiZXhwIjoxNzU3MjU4NTk1fQ.f5Pre4tLpmrWfRvQdidBdtl9WsCY5jnI94E30BNqCc0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\" : \"1234@Samira\",\r\n    \"newPassword\": \"12345@Samira\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/auth/change-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"change-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-DhcoonITz3PHSyZjFGffD3uRmBk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 15:25:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Password changed successfully\",\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Get All Driver",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjODRjYWMxZWVjOTBkMTZiZmQ2OWQiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE4ODI5OSwiZXhwIjoxNzU3Mjc0Njk5fQ.eMFokpLDmdT_x495-ySamTRWGIxKWJ-I16KVjktv2Z0",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1NjI0OSwiZXhwIjoxNzU3NDQyNjQ5fQ.Ms6iCzfqC_BbZ7VW62WZC0xvQ5UC-PX6Y7RLhgHca0s",
+								"description": "super admin",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/all-drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"all-drivers"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "isAvailable,approvalStatus,totalEarnings",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Driver",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjODRjYWMxZWVjOTBkMTZiZmQ2OWQiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE4ODI5OSwiZXhwIjoxNzU3Mjc0Njk5fQ.eMFokpLDmdT_x495-ySamTRWGIxKWJ-I16KVjktv2Z0",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1NjI0OSwiZXhwIjoxNzU3NDQyNjQ5fQ.Ms6iCzfqC_BbZ7VW62WZC0xvQ5UC-PX6Y7RLhgHca0s",
+										"description": "super admin",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/all-drivers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"all-drivers"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "fields",
+											"value": "isAvailable,approvalStatus,totalEarnings",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "709"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c5-pmOtFiJvcaZNXpWi1E3hrepNCkk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 22:38:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"All drivers retrieved successfully\",\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 3,\n        \"totalPage\": 1\n    },\n    \"data\": [\n        {\n            \"_id\": \"68bf204ca7cdc9c24d03630c\",\n            \"user\": {\n                \"_id\": \"68bf204ca7cdc9c24d03630a\",\n                \"name\": \"Rajib\",\n                \"email\": \"rajib@gmail.com\"\n            },\n            \"totalEarnings\": 537.5,\n            \"isAvailable\": \"OFFLINE\",\n            \"approvalStatus\": \"APPROVED\"\n        },\n        {\n            \"_id\": \"68bf2043a7cdc9c24d036307\",\n            \"user\": {\n                \"_id\": \"68bf2043a7cdc9c24d036305\",\n                \"name\": \"Kabir\",\n                \"email\": \"kabir@gmail.com\"\n            },\n            \"totalEarnings\": 0,\n            \"isAvailable\": \"OFFLINE\",\n            \"approvalStatus\": \"PENDING\"\n        },\n        {\n            \"_id\": \"68bf2017a7cdc9c24d036302\",\n            \"user\": {\n                \"_id\": \"68bf2017a7cdc9c24d036300\",\n                \"name\": \"Arif\",\n                \"email\": \"arif@gmail.com\"\n            },\n            \"totalEarnings\": 300,\n            \"isAvailable\": \"OFFLINE\",\n            \"approvalStatus\": \"APPROVED\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Single Driver",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzQwMzA1NCwiZXhwIjoxNzU3NDg5NDU0fQ.z5hw2nlbByc2-Vu4dSuFKaoU5FLOXBkysFhveougEaQ",
+								"description": "super admin",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOTQ4ZmU1ZTc0M2QyYjZjM2ZkNmMiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE4OTM3MSwiZXhwIjoxNzU3Mjc1NzcxfQ.fr-TVYSR-JdU960cnSk6sw_wAM81lkMEHGh92gk_JKQ",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxODk2NzgsImV4cCI6MTc1NzI3NjA3OH0.rWNLijZsPKcHo0jQnN6v069TRMIbVddRjmORZvCtqE8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/68bf2017a7cdc9c24d036302",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"68bf2017a7cdc9c24d036302"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Single Driver",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzQwMzA1NCwiZXhwIjoxNzU3NDg5NDU0fQ.z5hw2nlbByc2-Vu4dSuFKaoU5FLOXBkysFhveougEaQ",
+										"description": "super admin",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOTQ4ZmU1ZTc0M2QyYjZjM2ZkNmMiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE4OTM3MSwiZXhwIjoxNzU3Mjc1NzcxfQ.fr-TVYSR-JdU960cnSk6sw_wAM81lkMEHGh92gk_JKQ",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxODk2NzgsImV4cCI6MTc1NzI3NjA3OH0.rWNLijZsPKcHo0jQnN6v069TRMIbVddRjmORZvCtqE8",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/68bf2017a7cdc9c24d036302",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"68bf2017a7cdc9c24d036302"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "614"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"266-JPFBuuGgGbP0/z+RcVH8jkvAk0Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 09 Sep 2025 07:39:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Driver retrieved successfully\",\n    \"data\": {\n        \"_id\": \"68bf2017a7cdc9c24d036302\",\n        \"user\": {\n            \"_id\": \"68bf2017a7cdc9c24d036300\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"role\": \"DRIVER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"arif@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-08T18:27:35.066Z\",\n            \"updatedAt\": \"2025-09-08T18:27:35.066Z\"\n        },\n        \"totalEarnings\": 300,\n        \"isAvailable\": \"OFFLINE\",\n        \"approvalStatus\": \"APPROVED\",\n        \"currentRide\": null,\n        \"vehicle\": null,\n        \"rating\": null,\n        \"createdAt\": \"2025-09-08T18:27:35.117Z\",\n        \"updatedAt\": \"2025-09-08T19:38:48.452Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get My Driving Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTA0MDIsImV4cCI6MTc1NzI3NjgwMn0.W-EZV-VcIDZDQbSs22ma6M04gqwYpPpQAN3QQD1PYMU",
+								"description": "admin",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE5MTMyOSwiZXhwIjoxNzU3Mjc3NzI5fQ.viXf0T62Y0vDPWD7X7iBHIZ4PsEP8iNZXOn57Vr_7DI",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+								"description": "driver Arif",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzI1ODk5MCwiZXhwIjoxNzU3MzQ1MzkwfQ.BGkVjXGsOD7kqSQaJcmfhiXLAzpOeupXAvyFVayne0A",
+								"description": "super admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get My Driving Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTA0MDIsImV4cCI6MTc1NzI3NjgwMn0.W-EZV-VcIDZDQbSs22ma6M04gqwYpPpQAN3QQD1PYMU",
+										"description": "admin",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzE5MTMyOSwiZXhwIjoxNzU3Mjc3NzI5fQ.viXf0T62Y0vDPWD7X7iBHIZ4PsEP8iNZXOn57Vr_7DI",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+										"description": "driver Arif",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzI1ODk5MCwiZXhwIjoxNzU3MzQ1MzkwfQ.BGkVjXGsOD7kqSQaJcmfhiXLAzpOeupXAvyFVayne0A",
+										"description": "super admin",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "577"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"241-ToaGrBqyrPZ4FqUt5slNOmMg5iU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Sep 2025 21:00:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Your driving profile retrieved successfully\",\n    \"data\": {\n        \"_id\": \"68bc9c9b42fdfefcbbd4f071\",\n        \"user\": {\n            \"_id\": \"68bc9c9b42fdfefcbbd4f06f\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"role\": \"DRIVER\",\n            \"isVerified\": false,\n            \"isActive\": \"ACTIVE\",\n            \"isDeleted\": false,\n            \"auths\": [\n                {\n                    \"provider\": \"credentials\",\n                    \"providerId\": \"arif@gmail.com\"\n                }\n            ],\n            \"createdAt\": \"2025-09-06T20:42:03.109Z\",\n            \"updatedAt\": \"2025-09-06T20:42:03.109Z\"\n        },\n        \"totalEarnings\": 0,\n        \"isAvailable\": \"OFFLINE\",\n        \"approvalStatus\": \"PENDING\",\n        \"createdAt\": \"2025-09-06T20:42:03.159Z\",\n        \"updatedAt\": \"2025-09-07T17:24:54.865Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Approve Driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1NjI0OSwiZXhwIjoxNzU3NDQyNjQ5fQ.Ms6iCzfqC_BbZ7VW62WZC0xvQ5UC-PX6Y7RLhgHca0s",
+								"description": "super admin",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTUzNzksImV4cCI6MTc1NzI4MTc3OX0.oybX6xnSGbHd2btAu2pM9rsXC232jpbj4XsrAQ86gwM",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTU5OTEsImV4cCI6MTc1NzI4MjM5MX0.t1SunYWH53A25Kyh4KINZq-SrIKGCVApPOfm2XCuzfg",
+								"description": "admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/approve/68bf2017a7cdc9c24d036302",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"approve",
+								"68bf2017a7cdc9c24d036302"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Approve Driver",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzE5NTQzMywiZXhwIjoxNzU3MjgxODMzfQ.OdtU8C-9gvpux3Bro3XSyD0p7mAmHYpJdWHAFUOg1PA",
+										"description": "super admin",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTUzNzksImV4cCI6MTc1NzI4MTc3OX0.oybX6xnSGbHd2btAu2pM9rsXC232jpbj4XsrAQ86gwM",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTU5OTEsImV4cCI6MTc1NzI4MjM5MX0.t1SunYWH53A25Kyh4KINZq-SrIKGCVApPOfm2XCuzfg",
+										"description": "admin",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/approve/68bc9c9b42fdfefcbbd4f071",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"approve",
+										"68bc9c9b42fdfefcbbd4f071"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "364"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16c-fYz/njzoMSXUQq/yhiOkGL2ShPA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Sep 2025 22:03:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Driver approved successfully\",\n    \"data\": {\n        \"_id\": \"68bc9c9b42fdfefcbbd4f071\",\n        \"user\": {\n            \"_id\": \"68bc9c9b42fdfefcbbd4f06f\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"isActive\": \"ACTIVE\"\n        },\n        \"totalEarnings\": 0,\n        \"isAvailable\": \"ONLINE\",\n        \"approvalStatus\": \"APPROVED\",\n        \"createdAt\": \"2025-09-06T20:42:03.159Z\",\n        \"updatedAt\": \"2025-09-06T22:03:03.706Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Suspend Driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzE5NTQzMywiZXhwIjoxNzU3MjgxODMzfQ.OdtU8C-9gvpux3Bro3XSyD0p7mAmHYpJdWHAFUOg1PA",
+								"description": "super admin",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTUzNzksImV4cCI6MTc1NzI4MTc3OX0.oybX6xnSGbHd2btAu2pM9rsXC232jpbj4XsrAQ86gwM",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTU5OTEsImV4cCI6MTc1NzI4MjM5MX0.t1SunYWH53A25Kyh4KINZq-SrIKGCVApPOfm2XCuzfg",
+								"description": "admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/suspend/68bc9c9b42fdfefcbbd4f071",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"suspend",
+								"68bc9c9b42fdfefcbbd4f071"
+							]
+						},
+						"description": "## PATCH /api/v1/drivers/suspend/{driverId}\n\nThis endpoint is used to suspend a driver in the system. By sending a PATCH request to this endpoint with the specific driver's ID, the system will process the suspension request.\n\n### Request Parameters\n\n- **driverId** (path parameter): A unique identifier for the driver that you wish to suspend. In the example provided, the driver ID is `68bc9c9b42fdfefcbbd4f071`.\n    \n\n### Response Format\n\nThe response will be returned in JSON format and will include the following fields:\n\n- **success** (boolean): Indicates whether the request was successful.\n    \n- **message** (string): A message providing additional context about the request (may be empty).\n    \n- **err** (object): An object containing error details, if applicable.\n    \n    - **statusCode** (integer): The status code representing the result of the operation.\n        \n- **data** (object): Contains detailed information about the driver if the operation was successful.\n    \n    - **_id** (string): The unique identifier of the driver.\n        \n    - **user** (object): Information about the user associated with the driver.\n        \n        - **_id** (string): User's unique identifier.\n            \n        - **name** (string): User's name.\n            \n        - **email** (string): User's email address.\n            \n        - **isActive** (boolean): Indicates whether the user is currently active.\n            \n    - **totalEarnings** (number): The total earnings of the driver.\n        \n    - **isAvailable** (boolean): Indicates whether the driver is currently available.\n        \n    - **approvalStatus** (string): The approval status of the driver.\n        \n    - **createdAt** (string): Timestamp of when the driver was created.\n        \n    - **updatedAt** (string): Timestamp of when the driver's information was last updated.\n        \n\n### Additional Notes\n\n- A successful suspension will return a response with `success` set to true and provide relevant driver data.\n    \n- If the request fails, a `400` status code may be returned, along with an error object indicating the failure reason.\n    \n- Ensure that the driver ID provided is valid and corresponds to an existing driver in the system.\n    \n\nThis endpoint allows you to suspend a driver by providing their unique identifier in the URL. The driver is identified by the ID specified in the endpoint path.\n\n#### Request\n\n- **Method:** PATCH\n    \n- **URL:** `{{base_url}}/api/v1/drivers/suspend/{driverId}`\n    \n- **Path Parameter:**\n    \n    - `driverId` (string): The unique identifier of the driver you wish to suspend.\n        \n\n#### Response\n\n- **Status Code:** 200 (Successful operation) or 400 (Bad Request)\n    \n- **Content-Type:** application/json\n    \n\n##### Successful Response Example:\n\n``` json\n{\n  \"statusCode\": 0,\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"_id\": \"\",\n    \"user\": {\n      \"_id\": \"\",\n      \"name\": \"\",\n      \"email\": \"\",\n      \"isActive\": \"\"\n    },\n    \"totalEarnings\": 0,\n    \"isAvailable\": \"\",\n    \"approvalStatus\": \"\",\n    \"createdAt\": \"\",\n    \"updatedAt\": \"\"\n  }\n}\n\n ```\n\n##### Error Response Example:\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"\",\n  \"err\": {\n    \"statusCode\": 0\n  },\n  \"stack\": \"\"\n}\n\n ```\n\n#### Notes\n\n- Ensure that the `driverId` is valid and corresponds to an existing driver in the system.\n    \n- A successful suspension will return the driver's details along with their current status.\n    \n- In case of an error, the response will include an error object with a status code and message for troubleshooting."
+					},
+					"response": [
+						{
+							"name": "Suspend Driver",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzE5NTQzMywiZXhwIjoxNzU3MjgxODMzfQ.OdtU8C-9gvpux3Bro3XSyD0p7mAmHYpJdWHAFUOg1PA",
+										"description": "super admin",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTUzNzksImV4cCI6MTc1NzI4MTc3OX0.oybX6xnSGbHd2btAu2pM9rsXC232jpbj4XsrAQ86gwM",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTU5OTEsImV4cCI6MTc1NzI4MjM5MX0.t1SunYWH53A25Kyh4KINZq-SrIKGCVApPOfm2XCuzfg",
+										"description": "admin",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/suspend/68bc9c9b42fdfefcbbd4f071",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"suspend",
+										"68bc9c9b42fdfefcbbd4f071"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "364"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16c-t7A1sbLJ+UWTa8Gr5ZOE8dPtR7M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Sep 2025 16:03:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Driver suspended successfully\",\n    \"data\": {\n        \"_id\": \"68bc9c9b42fdfefcbbd4f071\",\n        \"user\": {\n            \"_id\": \"68bc9c9b42fdfefcbbd4f06f\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"isActive\": \"ACTIVE\"\n        },\n        \"totalEarnings\": 0,\n        \"isAvailable\": \"ONLINE\",\n        \"approvalStatus\": \"SUSPEND\",\n        \"createdAt\": \"2025-09-06T20:42:03.159Z\",\n        \"updatedAt\": \"2025-09-07T16:03:35.946Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Driver Online Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTA0MDIsImV4cCI6MTc1NzI3NjgwMn0.W-EZV-VcIDZDQbSs22ma6M04gqwYpPpQAN3QQD1PYMU",
+								"description": "admin",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI2NDYzNywiZXhwIjoxNzU3MzUxMDM3fQ.qLMxiyOZChWvaRy88ETME-I73DXU7eAM5TqUnlyiOUY",
+								"description": "driver Arif",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTE0MzYsImV4cCI6MTc1NzI3NzgzNn0.j4aNtozfb5jVtCitVZMsMSuOUckhRsDnacvxSprHkao",
+								"description": "driver",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzI1ODk5MCwiZXhwIjoxNzU3MzQ1MzkwfQ.BGkVjXGsOD7kqSQaJcmfhiXLAzpOeupXAvyFVayne0A",
+								"description": "super admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isAvailable\" : \"ONLINE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/available-status/68bc9c9b42fdfefcbbd4f071",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"available-status",
+								"68bc9c9b42fdfefcbbd4f071"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Driver Online Status",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTA0MDIsImV4cCI6MTc1NzI3NjgwMn0.W-EZV-VcIDZDQbSs22ma6M04gqwYpPpQAN3QQD1PYMU",
+										"description": "admin",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI2NDYzNywiZXhwIjoxNzU3MzUxMDM3fQ.qLMxiyOZChWvaRy88ETME-I73DXU7eAM5TqUnlyiOUY",
+										"description": "driver Arif",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTE0MzYsImV4cCI6MTc1NzI3NzgzNn0.j4aNtozfb5jVtCitVZMsMSuOUckhRsDnacvxSprHkao",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzI1ODk5MCwiZXhwIjoxNzU3MzQ1MzkwfQ.BGkVjXGsOD7kqSQaJcmfhiXLAzpOeupXAvyFVayne0A",
+										"description": "super admin",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isAvailable\" : \"OFFLINE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/available-status/68bc9c9b42fdfefcbbd4f071",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"available-status",
+										"68bc9c9b42fdfefcbbd4f071"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "377"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"179-qIQw4x794wX1E9cdgFU0ULwQgfc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Sep 2025 17:24:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Driver online status updated successfully\",\n    \"data\": {\n        \"_id\": \"68bc9c9b42fdfefcbbd4f071\",\n        \"user\": {\n            \"_id\": \"68bc9c9b42fdfefcbbd4f06f\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"isActive\": \"ACTIVE\"\n        },\n        \"totalEarnings\": 0,\n        \"isAvailable\": \"OFFLINE\",\n        \"approvalStatus\": \"PEDNING\",\n        \"createdAt\": \"2025-09-06T20:42:03.159Z\",\n        \"updatedAt\": \"2025-09-07T17:24:54.865Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Total Earnings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTA0MDIsImV4cCI6MTc1NzI3NjgwMn0.W-EZV-VcIDZDQbSs22ma6M04gqwYpPpQAN3QQD1PYMU",
+								"description": "admin",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjAxN2E3Y2RjOWMyNGQwMzYzMDAiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM2MTA4NiwiZXhwIjoxNzU3NDQ3NDg2fQ.u9kl3rB8No0iy26eTY9axrWPNbRRQIOKk6iPWKyTEMw",
+								"description": "driver Arif",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNjEyMDMsImV4cCI6MTc1NzQ0NzYwM30.FIIjVcxsGQoddQnwUq0tWbVCeOYHqCvsYJ5PtojWZXk",
+								"description": "driver rajib",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM2MTE0NywiZXhwIjoxNzU3NDQ3NTQ3fQ.6eKI_dk2GiIqD-mdy3tn-HFOceKqGGXf1vScHyk1p1s",
+								"description": "super admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/earnings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"earnings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Driver Online Status",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjNjM1NzNiZTYxY2Y1NmU0MGMyZTQiLCJlbWFpbCI6InNhbWlyYUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTcxOTA0MDIsImV4cCI6MTc1NzI3NjgwMn0.W-EZV-VcIDZDQbSs22ma6M04gqwYpPpQAN3QQD1PYMU",
+										"description": "admin",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI2NDYzNywiZXhwIjoxNzU3MzUxMDM3fQ.qLMxiyOZChWvaRy88ETME-I73DXU7eAM5TqUnlyiOUY",
+										"description": "driver Arif",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWNlZTQyZmRmZWZjYmJkNGYwODAiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTcxOTE0MzYsImV4cCI6MTc1NzI3NzgzNn0.j4aNtozfb5jVtCitVZMsMSuOUckhRsDnacvxSprHkao",
+										"description": "driver",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzI1ODk5MCwiZXhwIjoxNzU3MzQ1MzkwfQ.BGkVjXGsOD7kqSQaJcmfhiXLAzpOeupXAvyFVayne0A",
+										"description": "super admin",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isAvailable\" : \"OFFLINE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/drivers/available-status/68bc9c9b42fdfefcbbd4f071",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"drivers",
+										"available-status",
+										"68bc9c9b42fdfefcbbd4f071"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "377"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"179-qIQw4x794wX1E9cdgFU0ULwQgfc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Sep 2025 17:24:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Driver online status updated successfully\",\n    \"data\": {\n        \"_id\": \"68bc9c9b42fdfefcbbd4f071\",\n        \"user\": {\n            \"_id\": \"68bc9c9b42fdfefcbbd4f06f\",\n            \"name\": \"Arif\",\n            \"email\": \"arif@gmail.com\",\n            \"isActive\": \"ACTIVE\"\n        },\n        \"totalEarnings\": 0,\n        \"isAvailable\": \"OFFLINE\",\n        \"approvalStatus\": \"PEDNING\",\n        \"createdAt\": \"2025-09-06T20:42:03.159Z\",\n        \"updatedAt\": \"2025-09-07T17:24:54.865Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Ride",
+			"item": [
+				{
+					"name": "Request Ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+								"description": "driver arif",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rider\": \"68beb2a1d36eb4c3e6bd5818\",\r\n  \"pickUp\": {\r\n    \"address\": \"Mirpur, Dhaka\"\r\n  },\r\n  \"destination\": {\r\n    \"address\": \"Shahabagh, Dhaka\"\r\n  },\r\n  \"distance\": 8000\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"request"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Request Ride",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+										"description": "driver arif",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"rider\": \"68beb2b5d36eb4c3e6bd581b\",\r\n  \"pickUp\": {\r\n    \"address\": \"Bashunadhara City, Dhaka\"\r\n  },\r\n  \"destination\": {\r\n    \"address\": \"Niketon, Dhaka\"\r\n  },\r\n  \"distance\": 4500\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/request",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"request"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "576"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"240-H3egVy9NgZRaGJmnxcLk/tsQ/+M\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 18:44:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 201,\n    \"success\": true,\n    \"message\": \"Ride request created successfully\",\n    \"data\": {\n        \"rider\": \"68beb2b5d36eb4c3e6bd581b\",\n        \"driver\": null,\n        \"vehicle\": null,\n        \"currentRiderId\": \"68beb2b5d36eb4c3e6bd581b\",\n        \"status\": \"REQUESTED\",\n        \"pickUp\": {\n            \"address\": \"Bashunadhara City, Dhaka\"\n        },\n        \"destination\": {\n            \"address\": \"Niketon, Dhaka\"\n        },\n        \"fare\": 212.5,\n        \"distance\": 4500,\n        \"requestedAt\": \"2025-09-08T18:36:23.126Z\",\n        \"acceptedAt\": null,\n        \"pickedUpAt\": null,\n        \"completedAt\": null,\n        \"canceledBy\": null,\n        \"rating\": null,\n        \"_id\": \"68bf23f43a9a987fb4bee8b3\",\n        \"createdAt\": \"2025-09-08T18:44:04.296Z\",\n        \"updatedAt\": \"2025-09-08T18:44:04.296Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Ride",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+								"description": "driver arif",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+								"description": "Driver Rajib",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1OTM3NiwiZXhwIjoxNzU3NDQ1Nzc2fQ.gK3Sd1xkuFUhIv6dYrof_B7gpPqvFXIxL19c_tCKNBs",
+								"description": "Super Admin",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/all-rides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"all-rides"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "status",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "status,fare,destination, pickUp",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Ride",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+										"description": "driver arif",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+										"description": "Driver Rajib",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1OTM3NiwiZXhwIjoxNzU3NDQ1Nzc2fQ.gK3Sd1xkuFUhIv6dYrof_B7gpPqvFXIxL19c_tCKNBs",
+										"description": "Super Admin",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/all-rides",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"all-rides"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "status",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "fields",
+											"value": "status,fare,destination, pickUp",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "925"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39d-XfsFy7vX3J9TLYcKeXuZoWmEdZg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 22:52:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"All rides retrieved successfully\",\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 5,\n        \"totalPage\": 1\n    },\n    \"data\": [\n        {\n            \"_id\": \"68bf5d789ba9249e10366112\",\n            \"status\": \"REQUESTED\",\n            \"pickUp\": {\n                \"address\": \"Mirpur, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Shahabagh, Dhaka\"\n            },\n            \"fare\": 300\n        },\n        {\n            \"_id\": \"68bf2a79179846268de858ba\",\n            \"status\": \"COMPLETED\",\n            \"pickUp\": {\n                \"address\": \"Mirpur, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Shahabagh, Dhaka\"\n            },\n            \"fare\": 300\n        },\n        {\n            \"_id\": \"68bf24a33a9a987fb4bee8cb\",\n            \"status\": \"CANCELED\",\n            \"pickUp\": {\n                \"address\": \"Moghbazar, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Shahabagh, Dhaka\"\n            },\n            \"fare\": 212.5\n        },\n        {\n            \"_id\": \"68bf23f43a9a987fb4bee8b3\",\n            \"status\": \"COMPLETED\",\n            \"pickUp\": {\n                \"address\": \"Bashunadhara City, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Niketon, Dhaka\"\n            },\n            \"fare\": 212.5\n        },\n        {\n            \"_id\": \"68bf2198a7cdc9c24d036324\",\n            \"status\": \"COMPLETED\",\n            \"pickUp\": {\n                \"address\": \"Bashunadhara Residential Area, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Shantinagar, Dhaka\"\n            },\n            \"fare\": 325\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Single Ride",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+								"description": "driver arif",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+								"description": "Driver Rajib",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1OTM3NiwiZXhwIjoxNzU3NDQ1Nzc2fQ.gK3Sd1xkuFUhIv6dYrof_B7gpPqvFXIxL19c_tCKNBs",
+								"description": "Super Admin",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/68bf2198a7cdc9c24d036324",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"68bf2198a7cdc9c24d036324"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Single Ride",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+										"description": "driver arif",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+										"description": "Driver Rajib",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1OTM3NiwiZXhwIjoxNzU3NDQ1Nzc2fQ.gK3Sd1xkuFUhIv6dYrof_B7gpPqvFXIxL19c_tCKNBs",
+										"description": "Super Admin",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/68bf2198a7cdc9c24d036324",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"68bf2198a7cdc9c24d036324"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "650"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28a-Ynbuy3opjTBprnODVr7Iit4OBJQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 19:23:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Ride retrieved successfully\",\n    \"data\": {\n        \"_id\": \"68bf2198a7cdc9c24d036324\",\n        \"rider\": \"68beb2b5d36eb4c3e6bd581b\",\n        \"driver\": \"68bf204ca7cdc9c24d03630c\",\n        \"vehicle\": null,\n        \"currentRiderId\": \"68beb2b5d36eb4c3e6bd581b\",\n        \"status\": \"COMPLETED\",\n        \"pickUp\": {\n            \"address\": \"Bashunadhara Residential Area, Dhaka\"\n        },\n        \"destination\": {\n            \"address\": \"Shantinagar, Dhaka\"\n        },\n        \"fare\": 325,\n        \"distance\": 9000,\n        \"requestedAt\": \"2025-09-08T18:25:45.018Z\",\n        \"acceptedAt\": \"2025-09-08T18:38:54.318Z\",\n        \"pickedUpAt\": null,\n        \"completedAt\": \"2025-09-08T18:42:10.419Z\",\n        \"canceledBy\": null,\n        \"rating\": null,\n        \"createdAt\": \"2025-09-08T18:34:00.512Z\",\n        \"updatedAt\": \"2025-09-08T18:42:10.420Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get My Rides",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjAxN2E3Y2RjOWMyNGQwMzYzMDAiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM2MDA5OSwiZXhwIjoxNzU3NDQ2NDk5fQ.KHpwK6gCO-vU-qI0-jOdzYzP44cBU1Q2GpcVE0hwP-o",
+								"description": "driver arif",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+								"description": "Driver Rajib",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get My Rides",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOWM5YjQyZmRmZWZjYmJkNGYwNmYiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzI3ODc4MywiZXhwIjoxNzU3MzY1MTgzfQ.PMO_vCPQ3orNGWDtVRkK2NIeR0lZsg8No2wc-alQKsw",
+										"description": "driver arif",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+										"description": "Driver Rajib",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1228"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4cc-rrdGpJRhRp00lifmeuLSaVadVhU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 19:15:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Your all rides have been retrieved successfully\",\n    \"data\": [\n        {\n            \"_id\": \"68bf2198a7cdc9c24d036324\",\n            \"rider\": \"68beb2b5d36eb4c3e6bd581b\",\n            \"driver\": \"68bf204ca7cdc9c24d03630c\",\n            \"vehicle\": null,\n            \"currentRiderId\": \"68beb2b5d36eb4c3e6bd581b\",\n            \"status\": \"COMPLETED\",\n            \"pickUp\": {\n                \"address\": \"Bashunadhara Residential Area, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Shantinagar, Dhaka\"\n            },\n            \"fare\": 325,\n            \"distance\": 9000,\n            \"requestedAt\": \"2025-09-08T18:25:45.018Z\",\n            \"acceptedAt\": \"2025-09-08T18:38:54.318Z\",\n            \"pickedUpAt\": null,\n            \"completedAt\": \"2025-09-08T18:42:10.419Z\",\n            \"canceledBy\": null,\n            \"rating\": null,\n            \"createdAt\": \"2025-09-08T18:34:00.512Z\",\n            \"updatedAt\": \"2025-09-08T18:42:10.420Z\"\n        },\n        {\n            \"_id\": \"68bf23f43a9a987fb4bee8b3\",\n            \"rider\": \"68beb2b5d36eb4c3e6bd581b\",\n            \"driver\": \"68bf204ca7cdc9c24d03630c\",\n            \"vehicle\": null,\n            \"currentRiderId\": \"68beb2b5d36eb4c3e6bd581b\",\n            \"status\": \"COMPLETED\",\n            \"pickUp\": {\n                \"address\": \"Bashunadhara City, Dhaka\"\n            },\n            \"destination\": {\n                \"address\": \"Niketon, Dhaka\"\n            },\n            \"fare\": 212.5,\n            \"distance\": 4500,\n            \"requestedAt\": \"2025-09-08T18:36:23.126Z\",\n            \"acceptedAt\": \"2025-09-08T18:45:40.975Z\",\n            \"pickedUpAt\": null,\n            \"completedAt\": \"2025-09-08T18:45:57.761Z\",\n            \"canceledBy\": null,\n            \"rating\": null,\n            \"createdAt\": \"2025-09-08T18:44:04.296Z\",\n            \"updatedAt\": \"2025-09-08T18:45:57.761Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Accept Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY0MTMsImV4cCI6MTc1NzQ0MjgxM30.451YQzA2cmZe--Ri3Dvty698U_dpbTtV18QhuZbFN8A",
+								"description": "driver rajib",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjAxN2E3Y2RjOWMyNGQwMzYzMDAiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM2MDA5OSwiZXhwIjoxNzU3NDQ2NDk5fQ.KHpwK6gCO-vU-qI0-jOdzYzP44cBU1Q2GpcVE0hwP-o",
+								"description": "driver arif",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0M2E3Y2RjOWMyNGQwMzYzMDUiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY1NDcsImV4cCI6MTc1NzQ0Mjk0N30.9BpwkQuntILWLzAb8wQRwPPACTikGpc-v5WQ2CswDLc",
+								"description": "driver kabir",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"driver\": \"68bf2017a7cdc9c24d036302\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/accept/68bf2a79179846268de858ba",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"accept",
+								"68bf2a79179846268de858ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ride Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2Q2YzQ4MTlkOWFlM2UwMDEyMjYiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczMzUyNjcsImV4cCI6MTc1NzQyMTY2N30.zNdLMjdNGQShk6KQCb5cbx5JTsSIlN6toeckZjnaI08",
+								"description": "driver rajib",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlZTViNGJmMjk5Y2ExMTM2NDdmOWIiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM0MTE2MSwiZXhwIjoxNzU3NDI3NTYxfQ.FxX5nTN8GAia0-TzxAcsv6M5cbqtrPGNOS6z3fLqsxI",
+								"description": "driver arif",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2UxMzY0OWI5N2NiYTk1MGM1ODYiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNDQ1MzIsImV4cCI6MTc1NzQzMDkzMn0.yC1mRR9EVgwP8CJxqYMqievGjHqigkYNHBBOa6n7N3Q",
+								"description": "driver kabir",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"IN_TRANSIT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/status/68bf07ff965167f7cec10631",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"status",
+								"68bf07ff965167f7cec10631"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Ride Status",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2Q2YzQ4MTlkOWFlM2UwMDEyMjYiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczMzUyNjcsImV4cCI6MTc1NzQyMTY2N30.zNdLMjdNGQShk6KQCb5cbx5JTsSIlN6toeckZjnaI08",
+										"description": "driver rajib",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlZTViNGJmMjk5Y2ExMTM2NDdmOWIiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM0MTE2MSwiZXhwIjoxNzU3NDI3NTYxfQ.FxX5nTN8GAia0-TzxAcsv6M5cbqtrPGNOS6z3fLqsxI",
+										"description": "driver arif",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2UxMzY0OWI5N2NiYTk1MGM1ODYiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNDQ1MzIsImV4cCI6MTc1NzQzMDkzMn0.yC1mRR9EVgwP8CJxqYMqievGjHqigkYNHBBOa6n7N3Q",
+										"description": "driver kabir",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"PICKED_UP\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/status/68bee78a8dc960dd6b016b04",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"status",
+										"68bee78a8dc960dd6b016b04"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "522"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20a-pRIiW5rKGfqt0qge5cvmt99pf5E\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 15:38:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Ride status updated successfully\",\n    \"data\": {\n        \"canceledBy\": null,\n        \"_id\": \"68bee78a8dc960dd6b016b04\",\n        \"rider\": \"68beb2a1d36eb4c3e6bd5818\",\n        \"currentRiderId\": \"68beb2a1d36eb4c3e6bd5818\",\n        \"status\": \"PICKED_UP\",\n        \"fare\": 287.5,\n        \"distance\": 7500,\n        \"requestedAt\": \"2025-09-08T14:24:41.003Z\",\n        \"isCancelled\": false,\n        \"createdAt\": \"2025-09-08T14:26:18.631Z\",\n        \"updatedAt\": \"2025-09-08T15:38:09.653Z\",\n        \"acceptedAt\": \"2025-09-08T14:26:33.651Z\",\n        \"driver\": \"68bee5b4bf299ca113647f9d\",\n        \"pickedUpAt\": \"2025-09-08T15:38:09.653Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Complete Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY5MTAsImV4cCI6MTc1NzQ0MzMxMH0.nXyZ4qa7eTMlSxQ3OiYTYYDUNqRJSKCWuTOPOSSUn54",
+								"description": "driver rajib",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjAxN2E3Y2RjOWMyNGQwMzYzMDAiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM2MDA5OSwiZXhwIjoxNzU3NDQ2NDk5fQ.KHpwK6gCO-vU-qI0-jOdzYzP44cBU1Q2GpcVE0hwP-o",
+								"description": "driver arif",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2UxMzY0OWI5N2NiYTk1MGM1ODYiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNDQ1MzIsImV4cCI6MTc1NzQzMDkzMn0.yC1mRR9EVgwP8CJxqYMqievGjHqigkYNHBBOa6n7N3Q",
+								"description": "driver kabir",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/complete/68bf2a79179846268de858ba",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"complete",
+								"68bf2a79179846268de858ba"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Complete Ride",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2Q2YzQ4MTlkOWFlM2UwMDEyMjYiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczMzUyNjcsImV4cCI6MTc1NzQyMTY2N30.zNdLMjdNGQShk6KQCb5cbx5JTsSIlN6toeckZjnaI08",
+										"description": "driver rajib",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlZTViNGJmMjk5Y2ExMTM2NDdmOWIiLCJlbWFpbCI6ImFyaWZAZ21haWwuY29tIiwicm9sZSI6IkRSSVZFUiIsImlhdCI6MTc1NzM0MTE2MSwiZXhwIjoxNzU3NDI3NTYxfQ.FxX5nTN8GAia0-TzxAcsv6M5cbqtrPGNOS6z3fLqsxI",
+										"description": "driver arif",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2UxMzY0OWI5N2NiYTk1MGM1ODYiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNDQ1MzIsImV4cCI6MTc1NzQzMDkzMn0.yC1mRR9EVgwP8CJxqYMqievGjHqigkYNHBBOa6n7N3Q",
+										"description": "driver kabir",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/complete/68bf07ff965167f7cec10631",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"complete",
+										"68bf07ff965167f7cec10631"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "556"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22c-HlOm9vYW9BkHxT9j+qv5kOOmlNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 16:53:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Ride completed successfully\",\n    \"data\": {\n        \"_id\": \"68bf07ff965167f7cec10631\",\n        \"rider\": \"68beb2a1d36eb4c3e6bd5818\",\n        \"currentRiderId\": \"68beb2a1d36eb4c3e6bd5818\",\n        \"status\": \"COMPLETED\",\n        \"fare\": 225,\n        \"distance\": 5000,\n        \"requestedAt\": \"2025-09-08T16:41:22.274Z\",\n        \"isCancelled\": false,\n        \"canceledBy\": null,\n        \"createdAt\": \"2025-09-08T16:44:47.178Z\",\n        \"updatedAt\": \"2025-09-08T16:53:02.155Z\",\n        \"acceptedAt\": \"2025-09-08T16:46:46.484Z\",\n        \"driver\": \"68bee5b4bf299ca113647f9d\",\n        \"pickedUpAt\": \"2025-09-08T16:51:05.905Z\",\n        \"completedAt\": \"2025-09-08T16:53:02.153Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY5MTAsImV4cCI6MTc1NzQ0MzMxMH0.nXyZ4qa7eTMlSxQ3OiYTYYDUNqRJSKCWuTOPOSSUn54",
+								"description": "driver rajib",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+								"description": "rider stefan",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+								"description": "rider damon",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2UxMzY0OWI5N2NiYTk1MGM1ODYiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNDQ1MzIsImV4cCI6MTc1NzQzMDkzMn0.yC1mRR9EVgwP8CJxqYMqievGjHqigkYNHBBOa6n7N3Q",
+								"description": "driver kabir",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1MjQwNiwiZXhwIjoxNzU3NDM4ODA2fQ.C-bSczj1qnYfAgE9i-rLBBK5MqTnliy4SEvb9fV1e6U",
+								"description": "super admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/rides/cancel/68bf24a33a9a987fb4bee8cb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"cancel",
+								"68bf24a33a9a987fb4bee8cb"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancel Ride",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJmMjA0Y2E3Y2RjOWMyNGQwMzYzMGEiLCJlbWFpbCI6InJhamliQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNTY5MTAsImV4cCI6MTc1NzQ0MzMxMH0.nXyZ4qa7eTMlSxQ3OiYTYYDUNqRJSKCWuTOPOSSUn54",
+										"description": "driver rajib",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJhMWQzNmViNGMzZTZiZDU4MTgiLCJlbWFpbCI6InN0ZWZhbkBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTczMjgxMDcsImV4cCI6MTc1NzQxNDUwN30.A7VU1uHBO_nk9nkY8xUmBWITzQs15ZszOx2K3kQ6kwk",
+										"description": "rider stefan",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlYjJiNWQzNmViNGMzZTZiZDU4MWIiLCJlbWFpbCI6ImRhbW9uQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1NzMyODE2NSwiZXhwIjoxNzU3NDE0NTY1fQ.v6BTclvqLDshu_-XAn4Uv87AFCvSKt4BEYXQwhL5bcg",
+										"description": "rider damon",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJlY2UxMzY0OWI5N2NiYTk1MGM1ODYiLCJlbWFpbCI6ImthYmlyQGdtYWlsLmNvbSIsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3NTczNDQ1MzIsImV4cCI6MTc1NzQzMDkzMn0.yC1mRR9EVgwP8CJxqYMqievGjHqigkYNHBBOa6n7N3Q",
+										"description": "driver kabir",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJjOGFjNmIwMDY3ZjZkMzhlOWUzYzciLCJlbWFpbCI6InN1cGVyQGdtYWlsLmNvbSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsImlhdCI6MTc1NzM1MjQwNiwiZXhwIjoxNzU3NDM4ODA2fQ.C-bSczj1qnYfAgE9i-rLBBK5MqTnliy4SEvb9fV1e6U",
+										"description": "super admin",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5000/api/v1/rides/cancel/68bf24a33a9a987fb4bee8cb",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"v1",
+										"rides",
+										"cancel",
+										"68bf24a33a9a987fb4bee8cb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "588"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24c-+BPMLpl2hq3ip3cyYFkJp7DQL/k\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Sep 2025 18:48:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"statusCode\": 200,\n    \"success\": true,\n    \"message\": \"Ride canceled successfully\",\n    \"data\": {\n        \"_id\": \"68bf24a33a9a987fb4bee8cb\",\n        \"rider\": \"68beb2b5d36eb4c3e6bd581b\",\n        \"driver\": \"68bf204ca7cdc9c24d03630c\",\n        \"vehicle\": null,\n        \"currentRiderId\": null,\n        \"status\": \"CANCELED\",\n        \"pickUp\": {\n            \"address\": \"Moghbazar, Dhaka\"\n        },\n        \"destination\": {\n            \"address\": \"Shahabagh, Dhaka\"\n        },\n        \"fare\": 212.5,\n        \"distance\": 4500,\n        \"requestedAt\": \"2025-09-08T18:36:23.126Z\",\n        \"acceptedAt\": \"2025-09-08T18:47:34.292Z\",\n        \"pickedUpAt\": null,\n        \"completedAt\": null,\n        \"canceledBy\": \"DRIVER\",\n        \"rating\": null,\n        \"createdAt\": \"2025-09-08T18:46:59.496Z\",\n        \"updatedAt\": \"2025-09-08T18:48:02.800Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
