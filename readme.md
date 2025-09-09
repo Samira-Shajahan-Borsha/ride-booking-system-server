@@ -247,7 +247,7 @@ The driver management logic ensures that only eligible, approved, and available 
 
 -   **Who:** Drivers
 -   **How:**
-    -   Drivers are linked to a user account and have additional fields such as approval status, availability, total earnings, and vehicle info.
+    -   Drivers are linked to a user account and have additional fields such as approval status, availability, total earnings, vehicle info and rating.
     -   Drivers can view their own profile and earnings via protected endpoints.
 
 ### 2. Approval & Suspension
@@ -263,7 +263,7 @@ The driver management logic ensures that only eligible, approved, and available 
 -   **Who:** Drivers
 -   **How:**
     -   Drivers can set their status to `ONLINE` or `OFFLINE` using a protected endpoint.
-    -   Only drivers marked as `ONLINE` and `APPROVED` are eligible to accept ride requests.
+    -   Only drivers marked as `APPROVED` are eligible to accept ride requests.
     -   Attempting to set the same status repeatedly is prevented with clear feedback.
 
 ### 4. Ride Assignment & Restrictions
@@ -333,3 +333,17 @@ src/
     ```sh
     npm run dev
     ```
+
+---
+
+## 🛠️ Technology Used
+
+-   **Node.js** & **Express.js** — Backend runtime and web framework
+-   **TypeScript** — Type-safe JavaScript
+-   **MongoDB** & **Mongoose** — NoSQL database and ODM
+-   **JWT** — Authentication and authorization
+-   **Bcrypt** — Password hashing
+-   **Zod** — Request validation
+-   **ESLint** — Linting and code quality
+-   **Vercel** — Deployment (if used)
+-   **Postman** — API testing
