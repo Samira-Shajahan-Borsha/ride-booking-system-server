@@ -232,10 +232,7 @@ The ride management logic is central to the platform, ensuring secure, fair, and
 
 -   Only one active ride per rider or driver at a time.
 -   Suspended/unapproved drivers cannot accept or update rides.
--   All actions are protected by JWT authentication and role-based authorization.
--   Proper error handling and status codes for all edge cases.
 
-This ride logic ensures a robust, scalable, and fair experience for all users, supporting the core business requirements of a modern ride booking platform.
 
 ---
 
@@ -345,5 +342,5 @@ src/
 -   **Bcrypt** — Password hashing
 -   **Zod** — Request validation
 -   **ESLint** — Linting and code quality
--   **Vercel** — Deployment (if used)
+-   **Vercel** — Deployment
 -   **Postman** — API testing
