@@ -11,7 +11,7 @@ import { APPROVAL_STATUS } from "../modules/driver/driver.interface";
 export const checkAuth =
     (...authRole: string[]) =>
     async (req: Request, res: Response, next: NextFunction) => {
-        const accessToken = req.headers.authorization;
+        const accessToken = req.headers.authorization || req.cookies.accessToken;
 
         if (!accessToken) {
             throw new AppError(httpStatus.UNAUTHORIZED, "No token received");
@@ -50,13 +50,19 @@ export const checkAuth =
         }
 
         if (isUserExist.isDeleted) {
-            throw new AppError(httpStatus.BAD_REQUEST, "User account is deleted. Please contact with support");
+            throw new AppError(
+                httpStatus.BAD_REQUEST,
+                "User account is deleted. Please contact with support"
+            );
         }
 
         // console.log(verifiedToken);
 
         if (!authRole.includes(verifiedToken.role)) {
-            throw new AppError(httpStatus.UNAUTHORIZED, "You are not permitted to access this route");
+            throw new AppError(
+                httpStatus.UNAUTHORIZED,
+                "You are not permitted to access this route"
+            );
         }
 
         req.user = verifiedToken;

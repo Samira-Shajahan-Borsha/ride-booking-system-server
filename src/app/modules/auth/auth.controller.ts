@@ -35,7 +35,7 @@ const getAccessToken = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
-        message: "Access token generated successfully",
+        message: "New Access token generated successfully",
         data: tokenInfo,
     });
 });

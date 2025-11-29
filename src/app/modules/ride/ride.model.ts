@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { IPickUp, IRide, STATUS } from "./ride.interface";
+import { IPickUp, IRide, PAYMENT_METHOD, STATUS } from "./ride.interface";
 import { ROLE } from "../user/user.interface";
 
 const pickUpSchema = new Schema<IPickUp>(
@@ -77,6 +77,14 @@ const rideSchema = new Schema<IRide>(
             type: Number,
             required: true,
             min: 0,
+        },
+        paymentMethod: {
+            type: String,
+            enum: {
+                values: Object.values(PAYMENT_METHOD),
+            },
+            required: true,
+            default: PAYMENT_METHOD.CASH,
         },
         requestedAt: {
             type: Date,

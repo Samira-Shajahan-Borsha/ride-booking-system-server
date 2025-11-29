@@ -10,6 +10,11 @@ export enum STATUS {
     CANCELED = "CANCELED",
 }
 
+export enum PAYMENT_METHOD {
+    CASH = "CASH",
+    CARD = "CARD",
+}
+
 export interface IPickUp {
     address: string;
     type?: "Point";
@@ -32,6 +37,7 @@ export interface IRide {
     destination: IDestination;
     fare?: number;
     distance?: number;
+    paymentMethod: PAYMENT_METHOD;
     requestedAt: Date;
     acceptedAt?: Date;
     pickedUpAt?: Date;

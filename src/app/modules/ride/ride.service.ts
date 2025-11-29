@@ -49,6 +49,46 @@ const requestRide = async (payload: IRide, riderId: string) => {
     return ride;
 };
 
+const getCurrentRide = async (userId: string) => {
+    const existingUser = await User.findById(userId);
+
+    if (!existingUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User doesn't exist");
+    }
+
+    let currentRide = null;
+
+    if (existingUser.role === ROLE.RIDER) {
+        currentRide = await Ride.findOne({
+            rider: existingUser?._id,
+            status: {
+                $in: [STATUS.REQUESTED, STATUS.ACCEPTED, STATUS.PICKED_UP, STATUS.IN_TRANSIT],
+            },
+        }).populate({
+            path: "driver",
+            select: "user",
+            populate: { path: "user", select: "name email role" },
+        });
+    }
+
+    if (existingUser.role === ROLE.DRIVER) {
+        const driver = await Driver.findOne({ user: existingUser?._id });
+
+        if (!driver) {
+            throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+        }
+
+        currentRide = await Ride.findOne({
+            driver: driver?._id,
+            status: {
+                $in: [STATUS.ACCEPTED, STATUS.PICKED_UP, STATUS.IN_TRANSIT],
+            },
+        }).populate("driver", "user");
+    }
+
+    return currentRide;
+};
+
 const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
     const existingRide = await Ride.findById(rideId);
 
@@ -156,7 +196,10 @@ const updateRideStatus = async (rideId: string, userId: string, payload: Partial
     }
 
     if (!existingRide.driver?.equals(isDriverExist._id)) {
-        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to update the status of this ride.");
+        throw new AppError(
+            httpStatus.UNAUTHORIZED,
+            "You are not authorized to update the status of this ride."
+        );
     }
 
     if (
@@ -170,7 +213,10 @@ const updateRideStatus = async (rideId: string, userId: string, payload: Partial
     }
 
     if (payload.status === existingRide.status) {
-        throw new AppError(httpStatus.BAD_REQUEST, `Ride status has already been updated to ${existingRide.status}`);
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            `Ride status has already been updated to ${existingRide.status}`
+        );
     }
 
     const rideUpdateStatusPayload =
@@ -198,7 +244,10 @@ const completeRide = async (rideId: string, userId: string) => {
     }
 
     if (existingRide.status === STATUS.COMPLETED || existingRide.status === STATUS.CANCELED) {
-        throw new AppError(httpStatus.BAD_REQUEST, `This ride has already been ${existingRide.status.toLowerCase()}`);
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            `This ride has already been ${existingRide.status.toLowerCase()}`
+        );
     }
 
     const currentUser = await User.findById(userId);
@@ -214,7 +263,10 @@ const completeRide = async (rideId: string, userId: string) => {
     }
 
     if (!existingRide.driver?.equals(isDriverExist._id)) {
-        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to complete this ride.");
+        throw new AppError(
+            httpStatus.UNAUTHORIZED,
+            "You are not authorized to complete this ride."
+        );
     }
 
     if (
@@ -271,7 +323,10 @@ const cancelRide = async (rideId: string, userId: string) => {
 
     if (currentUser.role === ROLE.RIDER) {
         if (!existingRide.rider.equals(currentUser._id)) {
-            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to cancel this ride.");
+            throw new AppError(
+                httpStatus.UNAUTHORIZED,
+                "You are not authorized to cancel this ride."
+            );
         }
     }
 
@@ -282,7 +337,10 @@ const cancelRide = async (rideId: string, userId: string) => {
         }
 
         if (!existingRide.driver?.equals(isDriverExist._id)) {
-            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to cancel this ride.");
+            throw new AppError(
+                httpStatus.UNAUTHORIZED,
+                "You are not authorized to cancel this ride."
+            );
         }
 
         await Driver.findByIdAndUpdate(existingRide.driver, { currentRide: null });
@@ -340,6 +398,7 @@ const getAllRide = async (query: Record<string, string>) => {
 
 export const RideService = {
     requestRide,
+    getCurrentRide,
     acceptRide,
     updateRideStatus,
     completeRide,
