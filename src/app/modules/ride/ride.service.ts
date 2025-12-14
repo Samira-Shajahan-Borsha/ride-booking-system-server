@@ -89,6 +89,15 @@ const getCurrentRide = async (userId: string) => {
     return currentRide;
 };
 
+const getIncomingRideRequests = async () => {
+    const result = await Ride.find({
+        driver: null,
+        status: STATUS.REQUESTED,
+    });
+
+    return result;
+};
+
 const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
     const existingRide = await Ride.findById(rideId);
 
@@ -307,9 +316,9 @@ const cancelRide = async (rideId: string, userId: string) => {
     }
 
     if (
-        existingRide.status === STATUS.COMPLETED ||
-        existingRide.status === STATUS.IN_TRANSIT ||
         existingRide.status === STATUS.PICKED_UP ||
+        existingRide.status === STATUS.IN_TRANSIT ||
+        existingRide.status === STATUS.COMPLETED ||
         existingRide.status === STATUS.CANCELED
     ) {
         throw new AppError(httpStatus.BAD_REQUEST, "This ride cannot be canceled");
@@ -399,6 +408,7 @@ const getAllRide = async (query: Record<string, string>) => {
 export const RideService = {
     requestRide,
     getCurrentRide,
+    getIncomingRideRequests,
     acceptRide,
     updateRideStatus,
     completeRide,

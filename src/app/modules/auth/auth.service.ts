@@ -54,7 +54,7 @@ const getAccessToken = async (refreshToken: string) => {
     }
 
     if (isUserExist.role === ROLE.DRIVER) {
-        const driver = await Driver.findOne({ userId: isUserExist._id });
+        const driver = await Driver.findOne({ user: isUserExist._id });
 
         if (!driver) {
             throw new AppError(httpStatus.NOT_FOUND, "Driver does not exist");

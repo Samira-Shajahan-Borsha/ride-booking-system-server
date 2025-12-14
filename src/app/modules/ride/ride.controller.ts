@@ -30,6 +30,17 @@ const getCurrentRide = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getIncomingRideRequests = catchAsync(async (req: Request, res: Response) => {
+    const result = await RideService.getIncomingRideRequests();
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Available rides retrieved successfully",
+        data: result,
+    });
+});
+
 const acceptRide = catchAsync(async (req: Request, res: Response) => {
     const rideId = req.params.id;
     const decodedToken = req.user;
@@ -126,6 +137,7 @@ const getAllRide = catchAsync(async (req: Request, res: Response) => {
 export const RideController = {
     requestRide,
     getCurrentRide,
+    getIncomingRideRequests,
     acceptRide,
     updateRideStatus,
     completeRide,
