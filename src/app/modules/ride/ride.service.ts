@@ -5,7 +5,7 @@ import httpStatus from "http-status-codes";
 import { Ride } from "./ride.model";
 import { BASE_FARE, PER_KM_RATE } from "./ride.constant";
 import { Driver } from "../driver/driver.model";
-import { APPROVAL_STATUS } from "../driver/driver.interface";
+import { APPROVAL_STATUS, IS_AVAILABLE } from "../driver/driver.interface";
 import { ROLE } from "../user/user.interface";
 import { JwtPayload } from "jsonwebtoken";
 import { QueryBuilder } from "../../utils/QueryBuilder";
@@ -138,6 +138,13 @@ const acceptRide = async (rideId: string, payload: IRide, userId: string) => {
         throw new AppError(
             httpStatus.BAD_REQUEST,
             "You cannot accept this ride. You driving account has not been approved."
+        );
+    }
+
+    if (isDriverExist.isAvailable === IS_AVAILABLE.OFFLINE) {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            "You are currently offline. Go online to start receiving and accepting ride requests."
         );
     }
 
