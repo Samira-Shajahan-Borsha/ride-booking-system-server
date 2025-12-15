@@ -46,14 +46,14 @@ const getAccessToken = async (refreshToken: string) => {
         throw new AppError(httpStatus.NOT_FOUND, "User does not exist");
     }
 
-    if (
+    /* if (
         (isUserExist.role === ROLE.RIDER || isUserExist.role === ROLE.DRIVER) &&
         isUserExist.isActive === IS_ACTIVE.BLOCKED
     ) {
         throw new AppError(httpStatus.BAD_REQUEST, "Your account is blocked");
-    }
+    } */
 
-    if (isUserExist.role === ROLE.DRIVER) {
+    /* if (isUserExist.role === ROLE.DRIVER) {
         const driver = await Driver.findOne({ user: isUserExist._id });
 
         if (!driver) {
@@ -66,7 +66,7 @@ const getAccessToken = async (refreshToken: string) => {
                 `You account is ${APPROVAL_STATUS.SUSPEND}. Please contact with support team`
             );
         }
-    }
+    } */
 
     if (isUserExist.isDeleted) {
         throw new AppError(httpStatus.BAD_REQUEST, "User account is deleted. Please contact with support");

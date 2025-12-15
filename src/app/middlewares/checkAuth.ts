@@ -27,14 +27,17 @@ export const checkAuth =
             throw new AppError(httpStatus.NOT_FOUND, "User does not exist");
         }
 
-        if (
+        // After login, if the user account is blocked or the driver approval status is PENDING Or SUSPEND, the token will be sent from backend.
+        // Frontend will handle it by redirecting it to a dedicated page "/account-status".
+
+        /* if (
             (isUserExist.role === ROLE.RIDER || isUserExist.role === ROLE.DRIVER) &&
             isUserExist.isActive === IS_ACTIVE.BLOCKED
         ) {
             throw new AppError(httpStatus.BAD_REQUEST, "Your account is blocked");
-        }
+        } */
 
-        if (isUserExist.role === ROLE.DRIVER) {
+        /* if (isUserExist.role === ROLE.DRIVER) {
             const driver = await Driver.findOne({ user: isUserExist._id });
 
             if (!driver) {
@@ -47,7 +50,7 @@ export const checkAuth =
                     `You account is ${APPROVAL_STATUS.SUSPEND}. Please contact with support team`
                 );
             }
-        }
+        } */
 
         if (isUserExist.isDeleted) {
             throw new AppError(
