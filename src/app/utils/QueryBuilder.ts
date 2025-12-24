@@ -26,7 +26,9 @@ export class QueryBuilder<T> {
     search(searchableFields: string[]): this {
         const searchTerm = this.query.searchTerm || "";
         const searchQuery = {
-            $or: searchableFields.map((field) => ({ [field]: { $regex: searchTerm, $options: "i" } })),
+            $or: searchableFields.map((field) => ({
+                [field]: { $regex: searchTerm, $options: "i" },
+            })),
         };
 
         this.modelQuery = this.modelQuery.find(searchQuery);
@@ -61,7 +63,9 @@ export class QueryBuilder<T> {
     }
 
     async getMeta() {
-        const totalDocuments = await this.modelQuery.model.countDocuments();
+        const totalDocuments = await this.modelQuery.model.countDocuments(
+            this.modelQuery.getFilter()
+        );
 
         const page = Number(this.query.page) || 1;
         const limit = Number(this.query.limit) || 10;

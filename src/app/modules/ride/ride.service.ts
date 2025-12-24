@@ -3,7 +3,7 @@ import { User } from "../user/user.model";
 import { IRide, STATUS } from "./ride.interface";
 import httpStatus from "http-status-codes";
 import { Ride } from "./ride.model";
-import { BASE_FARE, PER_KM_RATE } from "./ride.constant";
+import { BASE_FARE, PER_KM_RATE, rideSearchableFields } from "./ride.constant";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS, IS_AVAILABLE } from "../driver/driver.interface";
 import { ROLE } from "../user/user.interface";
@@ -371,22 +371,62 @@ const cancelRide = async (rideId: string, userId: string) => {
     return updatedRide;
 };
 
-const getMyRides = async (decodedToken: JwtPayload) => {
+const getAllRides = async (query: Record<string, string>, decodedToken: JwtPayload) => {
     const existingUser = await User.findById(decodedToken.userId);
 
     if (!existingUser) {
         throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
 
+    const baseFilter: Record<string, unknown> = {};
+
     if (existingUser.role === ROLE.DRIVER) {
-        const driver = await Driver.findOne({ user: existingUser._id });
-        const rides = await Ride.find({ driver: driver?._id, status: STATUS.COMPLETED });
-        return rides;
+        const driver = await Driver.findOne({ user: existingUser._id }).select("_id");
+        if (driver) baseFilter.driver = driver._id;
     }
 
-    const rides = await Ride.find({ rider: existingUser?._id });
+    if (existingUser.role === ROLE.RIDER) {
+        baseFilter.rider = existingUser._id;
+    }
 
-    return rides;
+    if (existingUser.role === ROLE.ADMIN || existingUser.role === ROLE.SUPER_ADMIN) {
+        if (query.startDate && query.endDate) {
+            baseFilter.createdAt = {
+                $gte: new Date(query.startDate),
+                $lte: new Date(query.endDate),
+            };
+        }
+    }
+
+    let rideQuery = Ride.find(baseFilter);
+
+    if (existingUser.role === ROLE.ADMIN || existingUser.role === ROLE.SUPER_ADMIN) {
+        rideQuery = rideQuery
+            .populate({
+                path: "driver",
+                populate: { path: "user", select: "name" },
+            })
+            .populate({
+                path: "rider",
+                select: "name",
+            });
+    }
+
+    const queryBuilder = new QueryBuilder(rideQuery, query);
+
+    const ridesQuery = queryBuilder
+        .search(rideSearchableFields)
+        .filter()
+        .sort()
+        .fields()
+        .paginate();
+
+    const [data, meta] = await Promise.all([ridesQuery.build(), queryBuilder.getMeta()]);
+
+    return {
+        data,
+        meta,
+    };
 };
 
 const getSingleRide = async (rideId: string) => {
@@ -399,19 +439,6 @@ const getSingleRide = async (rideId: string) => {
     return existingRide;
 };
 
-const getAllRide = async (query: Record<string, string>) => {
-    const queryBuilder = new QueryBuilder(Ride.find(), query);
-
-    const rides = queryBuilder.filter().sort().fields().paginate();
-
-    const [data, meta] = await Promise.all([rides.build(), queryBuilder.getMeta()]);
-
-    return {
-        data,
-        meta,
-    };
-};
-
 export const RideService = {
     requestRide,
     getCurrentRide,
@@ -420,7 +447,6 @@ export const RideService = {
     updateRideStatus,
     completeRide,
     cancelRide,
-    getMyRides,
     getSingleRide,
-    getAllRide,
+    getAllRides,
 };
