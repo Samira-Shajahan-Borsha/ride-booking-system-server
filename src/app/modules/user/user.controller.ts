@@ -54,6 +54,32 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const blockRider = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.params.id;
+
+    const result = await UserService.blockRider(userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Blocked rider successfully",
+        data: result,
+    });
+});
+
+const unblockRider = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.params.id;
+
+    const result = await UserService.unblockRider(userId);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Unblocked rider successfully",
+        data: result,
+    });
+});
+
 const getUser = catchAsync(async (req: Request, res: Response) => {
     const userId = req.params.id;
     const result = await UserService.getUser(userId);
@@ -85,6 +111,8 @@ export const UserController = {
     getAllUsers,
     getAllRiders,
     getMe,
+    blockRider,
+    unblockRider,
     getUser,
     updateUser,
 };

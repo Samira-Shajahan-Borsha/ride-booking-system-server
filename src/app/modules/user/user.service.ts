@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import httpStatus from "http-status-codes";
 import { envVars } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
-import { IAuthProvider, IUser, ROLE } from "./user.interface";
+import { IAuthProvider, IS_ACTIVE, IUser, ROLE } from "./user.interface";
 import { User } from "./user.model";
 import { Driver } from "../driver/driver.model";
 import { APPROVAL_STATUS } from "../driver/driver.interface";
@@ -119,6 +119,64 @@ const getMe = async (userId: string) => {
     return user;
 };
 
+const blockRider = async (userId: string) => {
+    const existingUser = await User.findById(userId);
+
+    if (!existingUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    if (existingUser.role === ROLE.DRIVER) {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            "Driver accounts cannot be blocked. Use Suspend or Approve options instead."
+        );
+    }
+
+    if (existingUser.isActive === IS_ACTIVE.BLOCKED) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Rider account is already blocked");
+    }
+
+    const updatedRider = await User.findByIdAndUpdate(
+        existingUser._id,
+        {
+            isActive: IS_ACTIVE.BLOCKED,
+        },
+        { new: true, runValidators: true }
+    ).select("-password");
+
+    return updatedRider;
+};
+
+const unblockRider = async (userId: string) => {
+    const existingUser = await User.findById(userId);
+
+    if (!existingUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    if (existingUser.role === ROLE.DRIVER) {
+        throw new AppError(
+            httpStatus.BAD_REQUEST,
+            "Driver accounts are always active. Use Suspend or Approve options to manage driver access."
+        );
+    }
+
+    if (existingUser.isActive === IS_ACTIVE.ACTIVE) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Rider account is already active");
+    }
+
+    const updatedRider = await User.findByIdAndUpdate(
+        existingUser._id,
+        {
+            isActive: IS_ACTIVE.ACTIVE,
+        },
+        { new: true, runValidators: true }
+    ).select("-password");
+
+    return updatedRider;
+};
+
 const getUser = async (userId: string) => {
     const user = await User.findById(userId).select("-password");
 
@@ -174,6 +232,8 @@ export const UserService = {
     getAllUsers,
     getAllRiders,
     getMe,
+    blockRider,
+    unblockRider,
     getUser,
     updateUser,
 };

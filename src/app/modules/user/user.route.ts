@@ -12,6 +12,8 @@ router.get("/all-users", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController
 router.get("/all-riders", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.getAllRiders);
 router.get("/me", checkAuth(...Object.values(ROLE)), UserController.getMe);
 
+router.patch("/block/:id", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.blockRider);
+router.patch("/unblock/:id", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.unblockRider);
 router.get("/:id", checkAuth(ROLE.SUPER_ADMIN, ROLE.ADMIN), UserController.getUser);
 router.patch(
     "/:id",
