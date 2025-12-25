@@ -390,6 +390,8 @@ const getAllRides = async (query: Record<string, string>, decodedToken: JwtPaylo
     }
 
     if (existingUser.role === ROLE.ADMIN || existingUser.role === ROLE.SUPER_ADMIN) {
+
+
         if (query.startDate && query.endDate) {
             baseFilter.createdAt = {
                 $gte: new Date(query.startDate),

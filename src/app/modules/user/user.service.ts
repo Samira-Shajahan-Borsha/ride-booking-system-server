@@ -24,7 +24,10 @@ const createUser = async (payload: Partial<IUser>) => {
             throw new AppError(httpStatus.BAD_REQUEST, "User with this email already exists");
         }
 
-        const hashedPassword = await bcrypt.hash(plainPassword as string, Number(envVars.BCRYPT_SALT_ROUND));
+        const hashedPassword = await bcrypt.hash(
+            plainPassword as string,
+            Number(envVars.BCRYPT_SALT_ROUND)
+        );
 
         const authProvider: IAuthProvider = {
             provider: "credentials",
@@ -88,6 +91,24 @@ const getAllUsers = async (query: Record<string, string>) => {
     };
 };
 
+const getAllRiders = async (query: Record<string, string>) => {
+    const queryBuilder = new QueryBuilder(User.find({ role: ROLE.RIDER }), query);
+
+    const users = queryBuilder.search(userSearchableFields).filter().sort().fields().paginate();
+
+    const [data, meta] = await Promise.all([users.build(), queryBuilder.getMeta()]);
+
+    const userData = data?.map((user) => {
+        const { password, ...usersWithoutPassword } = user.toObject();
+        return usersWithoutPassword;
+    });
+
+    return {
+        data: userData,
+        meta: meta,
+    };
+};
+
 const getMe = async (userId: string) => {
     const user = await User.findById(userId).select("-password");
 
@@ -126,17 +147,24 @@ const updateUser = async (userId: string, decodedToken: JwtPayload, payload: Par
 
     if (decodedToken.role === ROLE.DRIVER || decodedToken.role === ROLE.RIDER) {
         if (String(user._id) !== decodedToken.userId) {
-            throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized to update other user");
+            throw new AppError(
+                httpStatus.UNAUTHORIZED,
+                "You are not authorized to update other user"
+            );
         }
     }
 
     if (user.role === ROLE.SUPER_ADMIN && decodedToken.role === ROLE.ADMIN) {
-        throw new AppError(httpStatus.FORBIDDEN, "Admins are not authorized to assign or update the Super Admin role");
+        throw new AppError(
+            httpStatus.FORBIDDEN,
+            "Admins are not authorized to assign or update the Super Admin role"
+        );
     }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, payload, { new: true, runValidators: true }).select(
-        "-password"
-    );
+    const updatedUser = await User.findByIdAndUpdate(userId, payload, {
+        new: true,
+        runValidators: true,
+    }).select("-password");
 
     return updatedUser;
 };
@@ -144,6 +172,7 @@ const updateUser = async (userId: string, decodedToken: JwtPayload, payload: Par
 export const UserService = {
     createUser,
     getAllUsers,
+    getAllRiders,
     getMe,
     getUser,
     updateUser,

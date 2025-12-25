@@ -5,14 +5,43 @@ import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
 
 const getAllDrivers = async (query: Record<string, string>) => {
+    const { searchTerm } = query;
+
     const queryBuilder = new QueryBuilder(Driver.find(), query);
+    queryBuilder.filter().sort().fields().paginate();
 
-    const drivers = await queryBuilder.filter().sort().fields().paginate();
+    const driversQuery = queryBuilder.build().populate({
+        path: "user",
+        select: "name email isActive",
+        match: searchTerm
+            ? {
+                  $or: [
+                      { name: { $regex: searchTerm, $options: "i" } },
+                      { email: { $regex: searchTerm, $options: "i" } },
+                  ],
+              }
+            : {},
+    });
 
-    const [data, meta] = await Promise.all([drivers.build().populate("user", "name email"), queryBuilder.getMeta()]);
+    const data = await driversQuery;
+
+    const filteredDrivers = data.filter((d) => d.user !== null);
+
+    let meta;
+
+    if (searchTerm) {
+        meta = {
+            page: Number(query.page) || 1,
+            limit: Number(query.limit) || 10,
+            total: filteredDrivers.length,
+            totalPage: Math.ceil(filteredDrivers.length / (Number(query.limit) || 10)),
+        };
+    } else {
+        meta = await queryBuilder.getMeta();
+    }
 
     return {
-        data,
+        data: filteredDrivers,
         meta,
     };
 };
@@ -89,14 +118,20 @@ const updateAvailableStatus = async (userId: string, driverId: string, payload: 
     }
 
     if (userId !== String(existingDriver.user)) {
-        throw new AppError(httpStatus.FORBIDDEN, "You are not authorized to access other driver profile");
+        throw new AppError(
+            httpStatus.FORBIDDEN,
+            "You are not authorized to access other driver profile"
+        );
     }
 
     if (
         existingDriver.approvalStatus === APPROVAL_STATUS.PENDING ||
         existingDriver.approvalStatus === APPROVAL_STATUS.SUSPEND
     ) {
-        throw new AppError(httpStatus.FORBIDDEN, "Your profile is not accessible until it has been approved");
+        throw new AppError(
+            httpStatus.FORBIDDEN,
+            "Your profile is not accessible until it has been approved"
+        );
     }
 
     if (existingDriver.isAvailable === payload.isAvailable) {

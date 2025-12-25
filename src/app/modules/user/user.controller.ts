@@ -29,6 +29,19 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getAllRiders = catchAsync(async (req: Request, res: Response) => {
+    const query = req.query;
+    const result = await UserService.getAllRiders(query as Record<string, string>);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "All riders retrieved successfully",
+        data: result.data,
+        meta: result.meta,
+    });
+});
+
 const getMe = catchAsync(async (req: Request, res: Response) => {
     const decodedToken = req.user;
     const result = await UserService.getMe(decodedToken.userId);
@@ -70,6 +83,7 @@ const updateUser = catchAsync(async (req: Request, res: Response) => {
 export const UserController = {
     createUser,
     getAllUsers,
+    getAllRiders,
     getMe,
     getUser,
     updateUser,

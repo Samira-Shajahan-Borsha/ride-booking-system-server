@@ -9,6 +9,7 @@ const router = Router();
 
 router.post("/register", validateRequest(createUserZodSchema), UserController.createUser);
 router.get("/all-users", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.getAllUsers);
+router.get("/all-riders", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), UserController.getAllRiders);
 router.get("/me", checkAuth(...Object.values(ROLE)), UserController.getMe);
 
 router.get("/:id", checkAuth(ROLE.SUPER_ADMIN, ROLE.ADMIN), UserController.getUser);
