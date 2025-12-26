@@ -34,7 +34,11 @@ const requestRide = async (payload: IRide, riderId: string) => {
         );
     }
 
-    const distanceInKm = (distance as number) / 1000;
+    const distanceInKm = Number(distance);
+
+    if (distanceInKm <= 0) {
+        throw new AppError(httpStatus.BAD_REQUEST, "Invalid distance");
+    }
 
     const fare = BASE_FARE + distanceInKm * PER_KM_RATE;
 
