@@ -1,12 +1,10 @@
 import bcrypt from "bcryptjs";
 import httpStatus from "http-status-codes";
 import AppError from "../../errorHelpers/AppError";
-import { IS_ACTIVE, IUser, ROLE } from "../user/user.interface";
+import { IUser } from "../user/user.interface";
 import { User } from "../user/user.model";
 import { generateToken, verifyToken } from "../../utils/jwt";
 import { envVars } from "../../config/env";
-import { Driver } from "../driver/driver.model";
-import { APPROVAL_STATUS } from "../driver/driver.interface";
 import { JwtPayload } from "jsonwebtoken";
 import { createTokens } from '../../utils/usertokens';
 

@@ -12,6 +12,7 @@ router.get("/me", checkAuth(ROLE.DRIVER), DriverController.getMyProfile);
 router.get("/earnings", checkAuth(ROLE.DRIVER), DriverController.getMyEarning);
 router.patch("/approve/:id", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), DriverController.approveDriver);
 router.patch("/suspend/:id", checkAuth(ROLE.ADMIN, ROLE.SUPER_ADMIN), DriverController.suspendDriver);
+router.patch("/vehicle", checkAuth(ROLE.DRIVER), DriverController.updateVehicle);
 router.post(
     "/available-status/:id",
     validateRequest(updateDriverOnlineStatus),

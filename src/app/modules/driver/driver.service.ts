@@ -1,5 +1,6 @@
 import AppError from "../../errorHelpers/AppError";
 import { QueryBuilder } from "../../utils/QueryBuilder";
+import { User } from "../user/user.model";
 import { APPROVAL_STATUS, IDriver } from "./driver.interface";
 import { Driver } from "./driver.model";
 import httpStatus from "http-status-codes";
@@ -88,6 +89,30 @@ const approveDriver = async (driverId: string) => {
     return updatedDriver;
 };
 
+const updateVehicle = async (userId: string, payload: Partial<IDriver>) => {
+    const existingUser = await User.findById(userId);
+
+    if (!existingUser) {
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    const existingDriver = await Driver.findOne({ user: existingUser?._id });
+
+    if (!existingDriver) {
+        throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+    }
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+        existingDriver._id,
+        {
+            vehicle: payload.vehicle,
+        },
+        { new: true, runValidators: true }
+    ).populate("user", "name email");
+
+    return updatedDriver;
+};
+
 const suspendDriver = async (driverId: string) => {
     const existingDriver = await Driver.findById(driverId);
 
@@ -168,6 +193,7 @@ export const DriverService = {
     getMyEarning,
     approveDriver,
     suspendDriver,
+    updateVehicle,
     updateAvailableStatus,
     getSingleDriver,
 };

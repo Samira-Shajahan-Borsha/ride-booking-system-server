@@ -70,11 +70,28 @@ const suspendDriver = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const updateVehicle = catchAsync(async (req: Request, res: Response) => {
+    const decodedToken = req.user;
+
+    const result = await DriverService.updateVehicle(decodedToken?.userId, req.body);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Vehicle info updated successfully",
+        data: result,
+    });
+});
+
 const updateAvailableStatus = catchAsync(async (req: Request, res: Response) => {
     const decodedToken = req.user;
     const driverId = req.params.id;
 
-    const result = await DriverService.updateAvailableStatus(decodedToken.userId, driverId, req.body);
+    const result = await DriverService.updateAvailableStatus(
+        decodedToken.userId,
+        driverId,
+        req.body
+    );
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
@@ -102,6 +119,7 @@ export const DriverController = {
     getMyEarning,
     approveDriver,
     suspendDriver,
+    updateVehicle,
     updateAvailableStatus,
     getSingleDriver,
 };

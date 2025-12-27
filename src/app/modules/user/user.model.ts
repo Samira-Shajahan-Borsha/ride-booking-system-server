@@ -17,8 +17,12 @@ const userSchema = new Schema<IUser>(
     {
         name: { type: String, required: [true, "Name is required"], trim: true, minLength: 2 },
         email: { type: String, required: [true, "Email is required"], trim: true },
-        password: { type: String, minlength: [8, "Password must contain 8 characters long"], trim: true },
-        phone: { type: String, trim: true },
+        password: {
+            type: String,
+            minlength: [8, "Password must contain 8 characters long"],
+            trim: true,
+        },
+        phone: { type: String, trim: true, default: null },
         role: {
             type: String,
             enum: {

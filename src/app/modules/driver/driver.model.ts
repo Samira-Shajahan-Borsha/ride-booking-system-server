@@ -53,8 +53,9 @@ const driverSchema = new Schema<IDriver>(
         },
         // location: locationSchema,
         vehicle: {
-            type: Schema.Types.ObjectId,
-            ref: "Vehicle",
+            type: String,
+            trim: true,
+            minLength: 2,
             default: null,
         },
         rating: {
