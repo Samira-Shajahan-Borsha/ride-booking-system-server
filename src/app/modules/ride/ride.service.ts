@@ -434,14 +434,44 @@ const getAllRides = async (query: Record<string, string>, decodedToken: JwtPaylo
     };
 };
 
-const getSingleRide = async (rideId: string) => {
-    const existingRide = await Ride.findById(rideId);
+const getSingleRide = async (decodedToken: JwtPayload, rideId: string) => {
+    const existingRide = await Ride.findById(rideId)
+        .populate("rider", "name email")
+        .populate({
+            path: "driver",
+            select: "user vehicle",
+            populate: { path: "user", select: "name email vehicle" },
+        });
 
     if (!existingRide) {
         throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
     }
 
-    return existingRide;
+    const { userId, role } = decodedToken;
+
+    if (role === ROLE.ADMIN || role === ROLE.SUPER_ADMIN) {
+        return existingRide;
+    }
+
+    if (role === ROLE.DRIVER) {
+        const driver = await Driver.findOne({ user: userId });
+
+        if (!driver) {
+            throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+        }
+        if (!existingRide.driver || !existingRide.driver.equals(driver?._id)) {
+            throw new AppError(httpStatus.FORBIDDEN, "You do not have access to this ride");
+        }
+
+        return existingRide;
+    }
+
+    if (role === "RIDER") {
+        if (!existingRide.rider.equals(userId)) {
+            throw new AppError(httpStatus.FORBIDDEN, "You do not have access to this ride");
+        }
+        return existingRide;
+    }
 };
 
 export const RideService = {

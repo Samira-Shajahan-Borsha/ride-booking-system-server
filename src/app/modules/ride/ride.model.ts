@@ -48,11 +48,6 @@ const rideSchema = new Schema<IRide>(
             ref: "Driver",
             default: null,
         },
-        vehicle: {
-            type: Schema.Types.ObjectId,
-            ref: "Vehicle",
-            default: null,
-        },
         currentRiderId: {
             type: Schema.Types.ObjectId || null,
             ref: "User",

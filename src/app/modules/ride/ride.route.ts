@@ -20,6 +20,6 @@ router.patch(
 );
 router.patch("/complete/:id", checkAuth(ROLE.DRIVER), RideController.completeRide);
 router.patch("/cancel/:id", checkAuth(ROLE.RIDER, ROLE.DRIVER), RideController.cancelRide);
-router.get("/:id", checkAuth(ROLE.SUPER_ADMIN, ROLE.ADMIN), RideController.getSingleRide);
+router.get("/:id", checkAuth(...Object.values(ROLE)), RideController.getSingleRide);
 
 export const RideRoutes = router;

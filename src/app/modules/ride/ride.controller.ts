@@ -113,8 +113,9 @@ export const getAllRides = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleRide = catchAsync(async (req: Request, res: Response) => {
     const rideId = req.params.id;
+    const decodedToken = req.user;
 
-    const result = await RideService.getSingleRide(rideId);
+    const result = await RideService.getSingleRide(decodedToken, rideId);
 
     sendResponse(res, {
         statusCode: httpStatus.OK,
