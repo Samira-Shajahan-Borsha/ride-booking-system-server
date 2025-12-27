@@ -393,19 +393,22 @@ const getAllRides = async (query: Record<string, string>, decodedToken: JwtPaylo
         baseFilter.rider = existingUser._id;
     }
 
-    if (existingUser.role === ROLE.ADMIN || existingUser.role === ROLE.SUPER_ADMIN) {
-
-        if (query.startDate && query.endDate) {
-            baseFilter.createdAt = {
-                $gte: new Date(query.startDate),
-                $lte: new Date(query.endDate),
-            };
-        }
+    if (query.startDate && query.endDate) {
+        baseFilter.createdAt = {
+            $gte: new Date(query.startDate),
+            $lte: new Date(query.endDate),
+        };
     }
 
     let rideQuery = Ride.find(baseFilter);
 
     if (existingUser.role === ROLE.ADMIN || existingUser.role === ROLE.SUPER_ADMIN) {
+        /* if (query.driverId) {
+            const driver = await Driver.findOne({ user: query.driverId }).select("_id");
+            if (driver) baseFilter.driver = driver._id;
+        }
+
+        if (query.riderId) baseFilter.rider = query.riderId; */
         rideQuery = rideQuery
             .populate({
                 path: "driver",
