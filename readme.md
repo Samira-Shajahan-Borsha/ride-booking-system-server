@@ -11,6 +11,7 @@ This backend system enables seamless ride booking and management for riders, dri
 -   **Riders** can request and cancel rides, and view their ride history.
 -   **Drivers** can accept/reject ride requests, update ride statuses, manage their availability, and view earnings.
 -   **Admins** can manage users, approve or suspend drivers, block/unblock accounts, and oversee all rides.
+-   **Stats** provide comprehensive analytics on user demographics, driver performance, ride trends, and driver earnings metrics.
 
 ---
 
@@ -23,6 +24,20 @@ This backend system enables seamless ride booking and management for riders, dri
 ```
 Email: super@gmail.com
 Password: 12345678
+```
+
+**Driver Test Credentials:**
+
+```
+Email: arif@gmail.com
+Password: 1234@Arif
+```
+
+**Rider Test Credentials:**
+
+```
+Email: ayon@gmail.com
+Password: 1234@Ayon
 ```
 
 ---
@@ -55,13 +70,16 @@ This layered approach ensures that only authenticated, active, and authorized us
 
 #### User Routes
 
-| Endpoint     | Method | Roles Allowed                           | Description         |
-| ------------ | ------ | --------------------------------------- | ------------------- |
-| `/register`  | POST   | Public                                  | Register a new user |
-| `/all-users` | GET    | ADMIN, SUPER_ADMIN                      | View all users      |
-| `/me`        | GET    | All (RIDER, DRIVER, ADMIN, SUPER_ADMIN) | View own profile    |
-| `/:id`       | GET    | ADMIN, SUPER_ADMIN                      | View user by ID     |
-| `/:id`       | PATCH  | All (RIDER, DRIVER, ADMIN, SUPER_ADMIN) | Update user by ID   |
+| Endpoint       | Method | Roles Allowed                           | Description         |
+| -------------- | ------ | --------------------------------------- | ------------------- |
+| `/register`    | POST   | Public                                  | Register a new user |
+| `/all-users`   | GET    | ADMIN, SUPER_ADMIN                      | View all users      |
+| `/all-riders`  | GET    | ADMIN, SUPER_ADMIN                      | View all riders     |
+| `/me`          | GET    | All (RIDER, DRIVER, ADMIN, SUPER_ADMIN) | View own profile    |
+| `/block/:id`   | PATCH  | ADMIN, SUPER_ADMIN                      | Block a rider       |
+| `/unblock/:id` | PATCH  | ADMIN, SUPER_ADMIN                      | Unblock a rider     |
+| `/:id`         | GET    | ADMIN, SUPER_ADMIN                      | View user by ID     |
+| `/:id`         | PATCH  | All (RIDER, DRIVER, ADMIN, SUPER_ADMIN) | Update user by ID   |
 
 #### Auth Routes
 
@@ -94,8 +112,24 @@ This layered approach ensures that only authenticated, active, and authorized us
 | `/earnings`             | GET    | DRIVER             | View own earnings            |
 | `/approve/:id`          | PATCH  | ADMIN, SUPER_ADMIN | Approve a driver             |
 | `/suspend/:id`          | PATCH  | ADMIN, SUPER_ADMIN | Suspend a driver             |
+| `/vehicle`              | PATCH  | DRIVER             | Update vehicle information   |
 | `/available-status/:id` | POST   | DRIVER             | Update online/offline status |
 | `/:id`                  | GET    | ADMIN, SUPER_ADMIN | View driver by ID            |
+
+#### Stats Routes
+
+| Endpoint     | Method | Roles Allowed      | Description                         |
+| ------------ | ------ | ------------------ | ----------------------------------- |
+| `/user`      | GET    | ADMIN, SUPER_ADMIN | View user statistics                |
+| `/driver`    | GET    | ADMIN, SUPER_ADMIN | View driver statistics              |
+| `/ride`      | GET    | ADMIN, SUPER_ADMIN | View ride statistics                |
+| `/driver/me` | GET    | DRIVER             | View own driver earnings statistics |
+
+#### Contact Routes
+
+| Endpoint   | Method | Roles Allowed | Description              |
+| ---------- | ------ | ------------- | ------------------------ |
+| `/message` | POST   | Public        | Submit a contact message |
 
 ---
 
@@ -165,7 +199,7 @@ The user management logic handles registration, profile management, and user sta
 -   **How:**
     -   Users can update their own profile.
     -   Only Admins and Super Admins can update roles or status fields.
-    -   Drivers and Riders cannot update their own role or status, nor update other users.
+    -   Drivers and Riders cannot update their own role, email or status, nor update other users.
 
 ---
 
@@ -189,6 +223,7 @@ The ride management logic is central to the platform, ensuring secure, fair, and
     -   Drivers can view and accept pending ride requests if:
         -   They are approved and not suspended.
         -   They do not have another active ride.
+        -   They are marked as `ONLINE`.
     -   Upon acceptance:
         -   Ride status updates to `ACCEPTED`.
         -   Driver’s `currentRide` is set.
@@ -233,7 +268,6 @@ The ride management logic is central to the platform, ensuring secure, fair, and
 -   Only one active ride per rider or driver at a time.
 -   Suspended/unapproved drivers cannot accept or update rides.
 
-
 ---
 
 ## 👨‍✈️ Driver Logic
@@ -260,7 +294,7 @@ The driver management logic ensures that only eligible, approved, and available 
 -   **Who:** Drivers
 -   **How:**
     -   Drivers can set their status to `ONLINE` or `OFFLINE` using a protected endpoint.
-    -   Only drivers marked as `APPROVED` are eligible to accept ride requests.
+    -   Only drivers marked as `APPROVED` and available status is `ONLINE` are eligible to accept ride requests.
     -   Attempting to set the same status repeatedly is prevented with clear feedback.
 
 ### 4. Ride Assignment & Restrictions
@@ -283,7 +317,8 @@ The driver management logic ensures that only eligible, approved, and available 
 -   **Who:** Admins
 -   **How:**
     -   Admins can view all drivers, approve/suspend them, and access individual driver profiles.
-    -   All driver-related actions are protected by role-based authentication and authorization.
+    -   Admins can block or unblock riders to manage account status and compliance.
+    -   All driver-related and rider management actions are protected by role-based authentication and authorization.
 
 ---
 
@@ -298,6 +333,8 @@ src/
 │   │   ├── user/           # User management (rider, driver, admin)
 │   │   ├── driver/         # Driver-specific logic
 │   │   ├── ride/           # Ride management logic
+│   │   ├── stats/          # Statistics and analytics
+│   │   ├── contact/        # Contact messages and inquiries
 │   ├── middlewares/        # Auth, role, error, and validation middlewares
 │   ├── utils/
 │   │   ├── catchAsync.ts       # Async error handling wrapper
