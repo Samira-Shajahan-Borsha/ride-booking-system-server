@@ -4,9 +4,6 @@ import { verifyToken } from "../utils/jwt";
 import { envVars } from "../config/env";
 import httpStatus from "http-status-codes";
 import { User } from "../modules/user/user.model";
-import { IS_ACTIVE, ROLE } from "../modules/user/user.interface";
-import { Driver } from "../modules/driver/driver.model";
-import { APPROVAL_STATUS } from "../modules/driver/driver.interface";
 
 export const checkAuth =
     (...authRole: string[]) =>
